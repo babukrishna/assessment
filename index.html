@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload"as="script" href="js/model.js" />
-    <link rel="preload"as="script" href="js/app.js" />
-    <link rel="preload"as="script" href="js/index.js" />
-    <title>Document</title>
-</head>
-<body>
-    <script src="js/model.js"> </script> 
-     <script src="js/app.js"></script> 
-    <script src="js/index.js"></script> 
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preload" as="script" href="js/utils.js" />
+		<link rel="preload" as="script" href="js/model.js" />
+		<link rel="preload" as="script" href="js/app.js" />
+		<link rel="preload" as="script" href="js/index.js" />
+		<title>Document</title>
+		<link rel="stylesheet" href="css/stylesheet.css" />
+	</head>
+	<body>
+        <header>
+            <div class="title">Theory and General Knowledge : Sanjay Sundram</div>
+            <div></div>
+        </header>
+		<main class="container">
+			<div class="quizHolder">
+				<h3 class="title"></h3>
+				<h4 class="description"></h4>
+				<p id="ques"></p>
+				<ul id="optionHolder" class="optionHolder">
+					<!-- question place holder -->
+				</ul>
+			</div>
+            <div id="reviewHolder" class="hide">
+                <h2>Questions</h2>
+                <p>Click the question numbers below to navigate directly to a question.</p>
+                <ul class="reviewQuestionList"></ul>
+            </div>
+		</main>
+        <footer>
+            <div>
+                <button class="btnSubmit" disabled="disabled" id="prevCTA"><</button>
+                <button class="btnSubmit" id="nextCTA">Next</button>
+            </div>
+            <button class="btnSubmit" id="reviewCTA">Review</button>
+        </footer>
+		<script src="js/utils.js"></script>
+		<script src="js/model.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/index.js"></script>
+	</body>
 </html>
