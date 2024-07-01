@@ -1,0 +1,17 @@
+{
+	"title": "Test",
+	"playerData": {
+		"id": "000000",
+		"name": "John Doe",
+		"bookmark": {
+			"sectionId": "intro",
+			"chapterId": 1,
+			"pageId": 1
+		},
+		"score": 0,
+		"status": "incomplete",
+		"dateCompleted": "",
+		"showHelp": true,
+		"suspend": null
+	}
+}
