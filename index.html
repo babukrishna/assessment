@@ -11,32 +11,97 @@
 		<link rel="stylesheet" href="css/stylesheet.css" />
 	</head>
 	<body>
-        <header>
-            <div class="title">Theory and General Knowledge : Sanjay Sundram</div>
-            <div></div>
-        </header>
-		<main class="container">
-			<div class="quizHolder">
-				<h3 class="title"></h3>
-				<h4 class="description"></h4>
-				<p id="ques"></p>
-				<ul id="optionHolder" class="optionHolder">
-					<!-- question place holder -->
-				</ul>
-			</div>
-            <div id="reviewHolder" class="hide">
-                <h2>Questions</h2>
-                <p>Click the question numbers below to navigate directly to a question.</p>
-                <ul class="reviewQuestionList"></ul>
-            </div>
-		</main>
-        <footer>
-            <div>
-                <button class="btnSubmit" disabled="disabled" id="prevCTA"><</button>
-                <button class="btnSubmit" id="nextCTA">Next</button>
-            </div>
-            <button class="btnSubmit" id="reviewCTA">Review</button>
-        </footer>
+		<div class="mainContainer">
+			<section class="section">
+				<header>
+					<div class="chapter">
+						<div class="title">Engineering</div>
+						<div class="subtitle">Module 1</div>
+					</div>
+
+					<div class="user">
+						<div class="userName"></div>
+						<img src="" class="userImage" />
+					</div>
+				</header>
+                <!-- intro section -->
+                <main class="container intro">
+                    <div class="left">
+                        <h1>Solar Theroy and General Knowledge</h1>
+                    </div>
+                    <div class="right">
+                        <img src="./img/home_img.png" />
+                    </div>
+                </main>
+
+                <!-- question section -->
+				<main class="container questionSection hide">
+					<div class="left">
+						<img src="./img/questionImage.png" />
+					</div>
+					<div class="right">
+						<div class="quizHolder">
+                            <!-- title and description in under disucssion -->
+							<!-- <h3 class="title"></h3>
+							<h4 class="description"></h4> -->
+
+                            <!-- timer holder -->
+                            <div class="timerHolder">
+                                <div class="timer">
+                                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" fill="white"/><circle cx="12" cy="12" r="9" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6V12L16.5 16.5" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/></svg> TIME REMAINING: 1 hr 22 minutes
+                                </div>
+                            </div>
+
+                            <!-- question count holder -->
+                            <div class="questionCountHolder">
+                                <div class="questionCount">
+                                    <strong>Question</strong> <strong class="currentQuestionCount">4</strong> of <strong class="totalQuestionCount">10</strong>
+                                </div>
+                            </div>
+                            <!-- question holder -->
+							<p id="ques"></p>
+
+                            <!-- option holder -->
+							<ul id="optionHolder" class="optionHolder">
+								<!-- question place holder -->
+							</ul>
+						</div>
+					</div>
+				</main>
+
+                <!-- review section -->
+                <main class="container reviewSection hide">
+                    <div class="top">
+                        <section class="content"><strong>Ready to submit the assessment?</strong> Click on the <strong>SUBMIT TEST</strong> button</section>
+                        <button>Submit Test</button>
+                    </div>
+					<div id="reviewHolder">
+                        <p><strong>Wish to review your answers?</strong> Click on any question to navigation to it.</p>
+                        <ul class="reviewQuestionList"></ul>
+                    </div>
+				</main>
+
+                <!-- end section -->
+                <main class="container ending hide">
+
+                </main>
+
+				<footer>
+					<button class="btnSubmit" id="reviewCTA"> <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Review</button>
+					<div>
+						<button
+							class="btnSubmit"
+							disabled="disabled"
+							id="prevCTA"
+						>
+							< Prev
+						</button>
+						<button class="btnSubmit" id="nextCTA">Next ></button>
+					</div>
+				</footer>
+			</section>
+		</div>
+
 		<script src="js/utils.js"></script>
 		<script src="js/model.js"></script>
 		<script src="js/app.js"></script>

@@ -21,4 +21,10 @@ class Utils {
 		}
 		return array;
 	}
+
+	getCategoryAndQuestionId(str){
+		const tempArr = String(str).split('q');
+		tempArr[1] = 'q'+tempArr[1];
+		return tempArr;
+	}
 }

@@ -1,17 +1,15 @@
 class Model {
-	//currentSectionId = null;
-	//currentPageId = 0;
-
 	data = null;
-
 	currentQuestionId = 0;
-	questionType = "";
-	userQuestionSet = {};
-	userSaveData = {};
-
+	categoryListArray = [];
+	questionsId = [];
+	userAttemptQuestions = {}
 	//Initializes model data
 	async init() {
 		this.data = await this.loadMetadata();
+		this.createCategoriesList();
+		this.createQuestionsId();
+		this.createUserAttemptQuestion();
 	}
 
 	//Loads the metadata file
@@ -19,99 +17,125 @@ class Model {
 		const response = await fetch("data/metadata.json");
 		return await response.json();
 	}
-	/* 
-		all Getter are here
-		getting data with JSON
-	 */
+
 	// Get all data
 	get dataAll() {
 		return this.data;
 	}
 
-	get getQuestionsIds() {
-		// pushing all question IDs
-		let IdsArray = [
-			...new Set(
-				Object.keys(this.getUserQuestionSet).map((item) => item)
-			),
-		];
+	createUserAttemptQuestion(){
+		if(Object.keys(this.data.userData.attemptQuestions).length !== 0){
+			this.userAttemptQuestions = this.data.userData.attemptQuestions;
+		}
+	}	
 
-		// number of questions are available to choose
-		if (
-			this.data.numberOfQuestions > 0 &&
-			IdsArray.length > this.data.numberOfQuestions
-		) {
-			IdsArray = IdsArray.slice(0, this.data.numberOfQuestions);
+	createCategoriesList(){
+		this.categoryListArray = Object.keys(this.data.set);
+	}
+
+	/* createQuestionListFromCategory(cid){
+		return Object.keys(this.data.set[cid]);
+	} */
+
+	createQuestionsId(){
+		const json = this.data.set;
+
+		// in case of already question id generated for specific user
+		if(this.data.userData.userQuestionSet && this.data.userData.userQuestionSet.length !== 0){
+			this.questionsId = this.data.userData.userQuestionSet;
+			return false;
 		}
 
-		// if random question is true will suffle all question ideas
-		if(this.data.randomQuestion){
-			IdsArray = utils.shuffleArray(IdsArray);
-		}
-		console.log(IdsArray)
-		//this.userSaveData = IdsArray;
-		return IdsArray;
-	}
+		// if question set is not provided
+		if(this.data.questionSetFromCategories.length !== 0){
+			for(let i=0; i<this.data.questionSetFromCategories.length; i++){
+				const tempArr = [];
+				const parentKey = this.data.questionSetFromCategories[i].categoryId;
+				const parentObj = json[parentKey];
+				
+				for (const childKey in parentObj) {
+					tempArr.push(`${parentKey}${childKey}`);
+				}
 
-	// get random question from all category
-	get getRandomQuestionFromAllCategory() {
-		return this.data.randomQuestionFromAllCategory;
-	}
-
-	// get guestion from category id
-	get getQuestionFromCategoryId() {
-		return this.data.questionFromCategoryId;
-	}
-
-	// if random option on/off for questions
-	get getRandomOption(){
-		return this.data.randomOption;
-	}
-
-	/* 
-		all getter and setter are below
-	*/
-	get getUserSavedData(){
-
-	}
-
-	set setUserSavedData(id){
-
-	}
-	// Set user question set
-	set setUserQuestionSet(id) {
-		// let userQuestionSet;
-		let obj = {};
-
-		if (this.getRandomQuestionFromAllCategory) {
-			/* const tempArr = [];
-			userQuestionSet = this.data.data.map((item) => {
-				item.questions.map((i) => {
-					tempArr.push(i);
-				});
-			});
-			userQuestionSet = [...tempArr]; */
+				if(this.data.questionSetFromCategories[i].random){
+					tempArr = utils.shuffleArray(tempArr)
+				}
+				
+				const numQuestions = this.data.questionSetFromCategories[i].numberOfQuestions;
+				if(numQuestions > 0 && Object.keys(parentObj).length >= numQuestions){
+					this.questionsId = [...this.questionsId, ...tempArr.splice(0, numQuestions)]
+				}
+			}
 		} else {
-			this.data.data[id].questions.map((item, index) => {
-				obj[`c${id}q${item.questionId}`] = {
-					...item,
-					categoryId: id,
-				};
-				this.userQuestionSet = obj;
-			});
+			for (const parentKey in json) {
+				const parentObj = json[parentKey];
+				for (const childKey in parentObj) {
+					this.questionsId.push(`${parentKey}${childKey}`);
+				}
+			}
+
+			// just shuffling array randomly
+			this.questionsId = utils.shuffleArray(this.questionsId);
+
+			// number of questions are available to choose
+			if (
+				this.data.numberOfQuestions > 0 &&
+				this.questionsId.length > this.data.numberOfQuestions
+			) {
+				this.questionsId = this.questionsId.slice(0, this.data.numberOfQuestions);
+			}
 		}
 	}
-
-	// Get user question set
-	get getUserQuestionSet() {
-		return this.userQuestionSet;
+	// get all categories list
+	get getCategoriesList(){
+		return this.categoryListArray;
 	}
-
-	set setCurrentQuestionId(id) {
-		this.currentQuestionId = this.getQuestionsIds[id];
+	// get all user questions set Id ['c2q0', 'c2q1', 'c1q0']
+	get getUserQuestionsSetId(){
+		return this.questionsId;
 	}
-
-	get getCurrentQuestionId() {
+	// set current question set id, id:number = 0
+	set setCurrentQuestionSetId(id) {
+		this.currentQuestionId = this.questionsId[id];
+	}
+	// get current question set ide 'c2q0'
+	get getCurrentQuestionSetId() {
 		return this.currentQuestionId;
+	}
+	// get current question id 'q0' it is coming from 'getCurrentQuestionSetId' 'c2q0'
+	get getCurrentQuestionId(){
+		return utils.getCategoryAndQuestionId(this.currentQuestionId)[1];
+	}
+	// get current category id 'c2' it is coming from 'getCurrentQuestionSetId' 'c2q0'
+	get getCurrentCategoryId(){
+		return utils.getCategoryAndQuestionId(this.currentQuestionId)[0];
+	}
+	// get current question as per current category and question id
+	get getCurrentQuestion(){
+		return this.data.set[this.getCurrentCategoryId][this.getCurrentQuestionId].question;
+	}
+	// get current question type as per current category and question id
+	get getCurrentQuestionType(){
+		return this.data.set[this.getCurrentCategoryId][this.getCurrentQuestionId].type;
+	}
+	// get current question options as per current category and question id
+	get getCurrentOptions(){
+		const options = this.data.set[this.getCurrentCategoryId][this.getCurrentQuestionId].options;
+		return this.data.randomOption ? utils.shuffleArray(options) : options;
+	}
+	// seting up those question list attempt by user
+	set setUserAttemptQuestions({cid, qid, oid}){
+		if(Object.keys(this.data.userData.attemptQuestions).length === 0){
+			if(!this.userAttemptQuestions[cid]){
+				this.userAttemptQuestions[cid] = {};
+			}
+			this.userAttemptQuestions[cid][qid] = oid;
+		}else{
+			this.userAttemptQuestions = this.data.userData.attemptQuestions;
+		}
+	}
+	// get questions attempt by user
+	get getUserAttemptQuestions(){
+		return this.userAttemptQuestions;
 	}
 }
