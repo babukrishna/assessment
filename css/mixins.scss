@@ -1,0 +1,54 @@
+/* 
+/** Mixins
+*/
+$breakpoint-xsmall: 360px;
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 1023px;
+
+@mixin media($breakpoint) {
+  @if ($breakpoint == xsmall) {
+    @media (max-width: $breakpoint-xsmall) {
+      @content;
+    }
+  } @else if ($breakpoint == small) {
+    @media (max-width: $breakpoint-small) {
+      @content;
+    }
+  } @else if ($breakpoint == medium) {
+    @media (max-width: $breakpoint-medium) {
+      @content;
+    }
+  } @else if ($breakpoint == large) {
+    @media (max-width: $breakpoint-large) {
+      @content;
+    }
+  } @else if ($breakpoint == tabAirLandscape) {
+    @media screen and (max-width: 1180px) and (orientation: landscape) {
+      @content;
+    }
+  } @else if ($breakpoint == tabAirPortrait) {
+    @media screen and (max-width: 820px) and (orientation: portrait) {
+      @content;
+    }
+  } @else if ($breakpoint == tabMiniLandscape) {
+    @media screen and (max-width: 1024px) and (orientation: landscape) {
+      @content;
+    }
+  } @else if ($breakpoint == tabMiniPortrait) {
+    @media screen and (max-width: 768px) and (orientation: portrait) {
+      @content;
+    }
+  } @else if ($breakpoint == notMobile) {
+    @media screen and (min-width: 820px) {
+      @content;
+    }
+  } @else if ($breakpoint == allTouchDevice) {
+    @media screen and (max-width: 820px) and (orientation: portrait),
+      screen and (max-width: 896px) and (orientation: landscape) {
+      @content;
+    }
+  } @else {
+    @error "UNKNOWN MEDIA BREAKPOINT #{$breakpoint}";
+  }
+}

@@ -1,7 +1,8 @@
 {
 	"time": 0,
-	"score": 0,
+	"passingScore": 80,
 	"numberOfQuestions": 10,
+	"byWeightage": false,
 	"questionSetFromCategories": [
 		{
 			"categoryId": "c0",
@@ -10,31 +11,17 @@
 		}
 	],
 	"randomOption": false,
-	"passingScore": 80,
-	"chapterTitle": "Engineering",
-	"chapterSubtitle": "Module 1: Engineering",
+	"chapterTitle": "Engineering And Contractor",
+	"chapterSubtitle": "Module 1: Engineering: What is the purpose of conducting a site evaluation?",
 	"userData": {
-		"name": "Krishna Babu",
-		"photo": "./img/profilePic.jpg",
-		"userQuestionSet": ["c0q8","c0q7","c0q17","c0q10","c0q1","c0q18","c0q0","c0q4","c0q9","c0q6","c0q2","c0q15","c0q14","c0q11","c0q3","c0q19","c0q5","c0q13","c0q12","c0q16"],
-		"attemptQuestions": {}
-	},
-	"otherPages": {
-		"introductionPage": {
-			"content": "",
-			"imagePath": ""
-		},
-		"endPage": {
-			"content": "",
-			"imagePath": ""
-		}
+		"name": "Jone Doe",
+		"userQuestionSet": ["c0q20","c0q8","c0q7","c0q17","c0q10","c0q1","c0q18","c0q0","c0q4","c0q9","c0q6","c0q2","c0q15","c0q14","c0q11","c0q3","c0q19","c0q5","c0q13","c0q12","c0q16"],
+		"attemptQuestions": {},
+		"spendTime": 0,
+		"score": 0
 	},
 	"categories": {
 		"c0": {
-			"title": "",
-			"description": ""
-		},
-		"c1": {
 			"title": "",
 			"description": ""
 		}
@@ -500,294 +487,31 @@
 						"option": "False"
 					}
 				]
-			}
-		},
-		"c1": {
-			"q0": {
-				"type": "mmcq",
-				"question": "MMCQ Parts of a Message   While you are walking around your project site, you stop by each team member to let them know the team is performing great so far. Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Indifference",
-						"selected": 0
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Confusion",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Happiness",
-						"selected": 0
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Anger",
-						"selected": 0
-					}
-				]
 			},
-			"q1": {
-				"type": "tnf",
-				"question": "Cat 0 TNF True or False? Compressed air is a safe and acceptable way to cool off.",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "TRUE",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 1,
-						"option": "FALSE",
-						"selected": 0
-					}
-				]
-			},
-			"q2": {
-				"type": "mcq",
-				"question": "Cat 0 MCQ Parts of a Message   While you are walking around your project site, you stop by each team member to let them know the team is performing great so far. Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Indifference",
-						"selected": 0
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Confusion",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Happiness",
-						"selected": 0
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Anger",
-						"selected": 0
-					}
-				]
-			},
-			"q3": {
-				"type": "mmcq",
-				"question": "Cat 0 MMCQ Parts of a Message   Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Good",
-						"selected": 0
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Better",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Best",
-						"selected": 0
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Worst",
-						"selected": 0
-					}
-				]
-			},
-			"q4": {
+			"q20": {
 				"type": "matching",
-				"question": "Cat 0 MMCQ Parts of a Message   Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
+				"question": "Find the perfect match",
 				"weightage": 0,
 				"options": [
 					{
 						"optionId": 0,
 						"isCorrect": 0,
-						"option": "Good",
-						"selected": 0
+						"option": "Installing the inverter"
 					},
 					{
 						"optionId": 1,
 						"isCorrect": 0,
-						"option": "Better",
-						"selected": 0
+						"option": "Running tech cable"
 					},
 					{
 						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Best",
-						"selected": 0
+						"isCorrect": 1,
+						"option": "Mounting the racking for the solar array"
 					},
 					{
 						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Worst",
-						"selected": 0
-					}
-				]
-			}
-		},
-		"c2": {
-			"q0": {
-				"type": "mmcq",
-				"question": "MMCQ Parts of a Message   While you are walking around your project site, you stop by each team member to let them know the team is performing great so far. Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
 						"isCorrect": 0,
-						"option": "Indifference",
-						"selected": 0
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Confusion",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Happiness",
-						"selected": 0
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Anger",
-						"selected": 0
-					}
-				]
-			},
-			"q1": {
-				"type": "tnf",
-				"question": "Cat 0 TNF True or False? Compressed air is a safe and acceptable way to cool off.",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "TRUE",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 1,
-						"option": "FALSE",
-						"selected": 0
-					}
-				]
-			},
-			"q2": {
-				"type": "mcq",
-				"question": "Cat 0 MCQ Parts of a Message   While you are walking around your project site, you stop by each team member to let them know the team is performing great so far. Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Indifference",
-						"selected": 0
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Confusion",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Happiness",
-						"selected": 0
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Anger",
-						"selected": 0
-					}
-				]
-			},
-			"q3": {
-				"type": "mmcq",
-				"question": "Cat 0 MMCQ Parts of a Message   Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Good",
-						"selected": 0
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Better",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Best",
-						"selected": 0
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Worst",
-						"selected": 0
-					}
-				]
-			},
-			"q4": {
-				"type": "matching",
-				"question": "Cat 0 MMCQ Parts of a Message   Everyone smiles and acknowledges your words, but one team member only nods passively and returns to his work.   What is one type of feeling the team member may be expressing?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Good",
-						"selected": 0
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Better",
-						"selected": 0
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Best",
-						"selected": 0
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Worst",
-						"selected": 0
+						"option": "Attaching you fall arrest harness"
 					}
 				]
 			}

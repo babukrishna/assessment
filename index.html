@@ -1,110 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="preload" as="script" href="js/utils.js" />
-		<link rel="preload" as="script" href="js/model.js" />
-		<link rel="preload" as="script" href="js/app.js" />
-		<link rel="preload" as="script" href="js/index.js" />
-		<title>Document</title>
-		<link rel="stylesheet" href="css/stylesheet.css" />
-	</head>
-	<body>
-		<div class="mainContainer">
-			<section class="section">
-				<header>
-					<div class="chapter">
-						<div class="title">Engineering</div>
-						<div class="subtitle">Module 1</div>
-					</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" as="script" href="js/utils.js" />
+    <link rel="preload" as="script" href="js/model.js" />
+    <link rel="preload" as="script" href="js/app.js" />
+    <link rel="preload" as="script" href="js/index.js" />
+    <title>Assessment: Solar Build Construction Management</title>
+    <link rel="stylesheet" href="css/stylesheet.css" />
+  </head>
+  <body>
+    <div class="mainContainer">
+      <section class="section">
+        <header>
+          <div class="chapter">
+            <div class="title">Engineering</div>
+            <div class="subtitle">Module 1</div>
+          </div>
 
-					<div class="user">
-						<div class="userName"></div>
-						<img src="" class="userImage" />
-					</div>
-				</header>
-                <!-- intro section -->
-                <main class="container intro">
-                    <div class="left">
-                        <h1>Solar Theroy and General Knowledge</h1>
-                    </div>
-                    <div class="right">
-                        <img src="./img/home_img.png" />
-                    </div>
-                </main>
+          <div class="user">
+            <div class="userName"></div>
+            <img src="./img/profilePic.svg" class="userImage" />
+          </div>
+        </header>
 
-                <!-- question section -->
-				<main class="container questionSection hide">
-					<div class="left">
-						<img src="./img/questionImage.png" />
-					</div>
-					<div class="right">
-						<div class="quizHolder">
-                            <!-- title and description in under disucssion -->
-							<!-- <h3 class="title"></h3>
-							<h4 class="description"></h4> -->
+        <div class="main">
+          <!-- intro section -->
+          <main class="container introSection hide">
+            <div class="left">
+              <h1>Solar Theroy and General Knowledge</h1>
+            </div>
+            <div class="right">
+              <img src="./img/home_img.png" class="desktopOnly" />
+              <img src="./img/home_img_mobile.png" class="mobileOnly" />
+            </div>
+          </main>
 
-                            <!-- timer holder -->
-                            <div class="timerHolder">
-                                <div class="timer">
-                                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" fill="white"/><circle cx="12" cy="12" r="9" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6V12L16.5 16.5" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/></svg> TIME REMAINING: 1 hr 22 minutes
-                                </div>
-                            </div>
+          <!-- instruction section -->
+          <main class="container instructionSection hide">
+            <div class="holder">
+            <h3 class="textCenter">Instruction</h3>
+              <p>
+                Laboris cillum consequat consectetur non fugiat adipisicing
+                culpa in amet est fugiat voluptate. Sunt sint dolore occaecat
+                culpa aliqua et voluptate excepteur fugiat ullamco velit nulla.
+                Eu laboris aute proident officia qui qui ex non adipisicing.
+              </p>
+              <p>
+                Qui eu sint nostrud qui. Nulla do sint nostrud sit esse non
+                mollit nostrud exercitation. Do incididunt ullamco est do
+                aliquip laborum aliquip ea ut sit nisi commodo minim ea. Nulla
+                commodo aliquip laborum est est ut occaecat nisi sunt sunt quis
+                laboris. Ea ex nisi laboris magna in labore ut ex anim.
+              </p>
+            </div>
+          </main>
 
-                            <!-- question count holder -->
-                            <div class="questionCountHolder">
-                                <div class="questionCount">
-                                    <strong>Question</strong> <strong class="currentQuestionCount">4</strong> of <strong class="totalQuestionCount">10</strong>
-                                </div>
-                            </div>
-                            <!-- question holder -->
-							<p id="ques"></p>
+          <!-- question section -->
+          <main class="container questionSection hide">
+            <div class="left">
+              <img src="./img/questionImage.png" />
+            </div>
+            <div class="right">
+              <div class="quizHolder">
+                <!-- title and description in under disucssion -->
+                <!-- <h3 class="title"></h3>
+                                <h4 class="description"></h4> -->
 
-                            <!-- option holder -->
-							<ul id="optionHolder" class="optionHolder">
-								<!-- question place holder -->
-							</ul>
-						</div>
-					</div>
-				</main>
+                <!-- timer holder -->
+                <div class="timerHolder">
+                  <div class="timer">
+                    <svg
+                      width="30px"
+                      height="30px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect width="24" height="24" fill="white" />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="9"
+                        stroke="#000000"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M12 6V12L16.5 16.5"
+                        stroke="#000000"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    TIME REMAINING: 1 hr 22 minutes
+                  </div>
+                </div>
 
-                <!-- review section -->
-                <main class="container reviewSection hide">
-                    <div class="top">
-                        <section class="content"><strong>Ready to submit the assessment?</strong> Click on the <strong>SUBMIT TEST</strong> button</section>
-                        <button>Submit Test</button>
-                    </div>
-					<div id="reviewHolder">
-                        <p><strong>Wish to review your answers?</strong> Click on any question to navigation to it.</p>
-                        <ul class="reviewQuestionList"></ul>
-                    </div>
-				</main>
+                <!-- question count holder -->
+                <div class="questionCountHolder">
+                  <div class="questionCount">
+                    <strong>Question</strong>
+                    <strong class="currentQuestionCount">4</strong> of
+                    <strong class="totalQuestionCount">10</strong>
+                  </div>
+                </div>
+                <!-- question holder -->
+                <p id="ques"></p>
 
-                <!-- end section -->
-                <main class="container ending hide">
+                <!-- option holder -->
+                <ul id="optionHolder" class="optionHolder">
+                  <!-- question place holder -->
+                </ul>
+              </div>
+            </div>
+          </main>
 
-                </main>
+          <!-- review section -->
+          <main class="container reviewSection hide">
+            <div class="top">
+              <section class="content">
+                <strong>Ready to submit the assessment?</strong> Click on the
+                <strong>SUBMIT TEST</strong> button
+              </section>
+              <button id="submitTest">Submit Test</button>
+            </div>
+            <div id="reviewHolder">
+              <p class="textCenter">
+                <strong>Wish to review your answers?</strong> Click on any
+                question to navigation to it.
+              </p>
+              <ul class="reviewQuestionList listing"></ul>
+            </div>
+          </main>
 
-				<footer>
-					<button class="btnSubmit" id="reviewCTA"> <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Review</button>
-					<div>
-						<button
-							class="btnSubmit"
-							disabled="disabled"
-							id="prevCTA"
-						>
-							< Prev
-						</button>
-						<button class="btnSubmit" id="nextCTA">Next ></button>
-					</div>
-				</footer>
-			</section>
-		</div>
+          <!-- end section -->
+          <main class="container endSection hide">
+            <div class="holder">
+              <h1 class="textCenter">Well Done</h1>
+              <p class="textCenter">
+                You can now close the window and attempt another assessment
+              </p>
+              <br />
+              <ul class="endQuestionList listing"></ul>
+            </div>
+          </main>
+        </div>
 
-		<script src="js/utils.js"></script>
-		<script src="js/model.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/index.js"></script>
-	</body>
+        <footer>
+          <button class="btnSubmit" disabled id="reviewCTA">
+            <svg
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                stroke="#000000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="desktopOnlyInline">Review</span>
+          </button>
+          <div>
+            <button class="btnSubmit" disabled="disabled" id="prevCTA">
+              < Prev
+            </button>
+            <button class="btnSubmit" id="nextCTA">Next ></button>
+          </div>
+        </footer>
+      </section>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>

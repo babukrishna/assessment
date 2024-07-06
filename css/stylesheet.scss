@@ -1,5 +1,6 @@
 @import "./../css/normalizer.scss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "../css/mixins.scss";
 
 * {
 	box-sizing: border-box;
@@ -9,6 +10,7 @@
 	--body-background-color: #282828;
 	--header-background-color: #363435;
 	--danger: #e03337;
+	--success: #61a654;
 	--white: #fff;
 	--black: #000;
 	--yellow: #ffdd0c;
@@ -38,7 +40,7 @@
 	--tnf-background-disable-color: var(--black);
 	--tnf-border-disable-color: #20252f;
 	--tnf-text-disable-color: var(--white);
-	
+
 	// footer config
 	--footer-background-color: var(--white);
 }
@@ -63,6 +65,34 @@ html {
 	text-align: center;
 }
 
+.desktopOnly {
+	display: block;
+	@include media(allTouchDevice) {
+		display: none !important;
+	}
+}
+
+.mobileOnly {
+	display: none;
+	@include media(allTouchDevice) {
+		display: block;
+	}
+}
+
+.desktopOnlyInline {
+	display: inline-block;
+	@include media(allTouchDevice) {
+		display: none !important;
+	}
+}
+
+.mobileOnlyInline {
+	display: none;
+	@include media(allTouchDevice) {
+		display: inline-block;
+	}
+}
+
 button {
 	border: 1px solid var(--cta-border-color);
 	background-color: var(--cta-background-color);
@@ -76,13 +106,18 @@ button {
 	text-transform: uppercase;
 	white-space: nowrap;
 
+	@include media(allTouchDevice){
+		padding: 5px 10px;
+		font-size: 17px;
+	}
+
 	&:hover {
 		border-color: var(--cta-border-hover-color);
 		background-color: var(--cta-background-hover-color);
 		color: var(--cta-text-hover-color);
 
-		svg{
-			path{
+		svg {
+			path {
 				stroke: var(--cta-text-hover-color);
 			}
 		}
@@ -93,11 +128,17 @@ button {
 		color: rgba(16, 16, 16, 0.3);
 		border: 1px solid rgba(16, 16, 16, 0.3);
 		background-color: rgba(0, 0, 0, 0);
+
+		svg {
+			path {
+				stroke: rgba(16, 16, 16, 0.3);
+			}
+		}
 	}
 
-	svg{
+	svg {
 		vertical-align: middle;
-		path{
+		path {
 			stroke: var(--cta-text-color);
 		}
 	}
@@ -111,6 +152,14 @@ button {
 	.section {
 		max-width: 1440px;
 		width: 100%;
+		height: 700px;
+
+		@include media(allTouchDevice){
+			display: flex;
+			flex-flow: row;
+			height: 100vh;
+			background-color: var(--main-background-color);
+		}
 	}
 }
 
@@ -120,15 +169,40 @@ header {
 	display: flex;
 	justify-content: space-between;
 
+	@include media(allTouchDevice) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		order: 1;
+	}
+
 	.chapter {
 		display: flex;
 		font-size: 20px;
 
 		.title {
-			padding: 10px;
+			padding: 10px 20px;
 			background-color: var(--chapter-title-background-color);
 			color: var(--chapter-title-text-color);
 			font-weight: 600;
+			padding-right: 20px;
+			position: relative;
+
+			@include media(allTouchDevice) {
+				display: none;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				width: 32px;
+				height: 32px;
+				background-color: var(--chapter-title-background-color);
+				display: block;
+				right: -17px;
+				top: 6px;
+				transform: rotate(45deg);
+			}
 		}
 
 		.subtitle {
@@ -136,6 +210,14 @@ header {
 			background-color: var(--chapter-subtitle-background-color);
 			color: var(--chapter-subtitle-text-color);
 			font-weight: 600;
+			padding-left: 40px;
+
+			@include media(allTouchDevice) {
+				padding: 10px 15px;
+				font-size: 16px;
+				font-weight: 400;
+				height: 56px;
+			}
 		}
 	}
 
@@ -143,9 +225,15 @@ header {
 		display: flex;
 		padding: 10px;
 		font-size: 20px;
+		align-items: center;
+
+		@include media(allTouchDevice) {
+			display: none;
+		}
 
 		.userName {
 			color: var(--username-text-color);
+			font-size: 16px;
 		}
 
 		.userImage {
@@ -157,82 +245,117 @@ header {
 	}
 }
 
+.main{
+	@include media(allTouchDevice){
+		order: 3;
+		margin-top: 110px;
+	}
+}
+
 main {
-	min-height: calc(100vh - 110px);
+	height: 592px;
 	background-color: var(--main-background-color);
 	width: 100%;
 	display: flex;
-	
-	img{
+
+	img {
 		width: 100%;
 		height: auto;
 	}
 
-	&.intro{
-		.left{
-			padding: 45px;
-			background-color: #eeedf2;
+	&.introSection {
+		overflow: hidden;
+
+		@include media(allTouchDevice) {
+			flex-direction: column;
 		}
 
-		.right{
+		.left {
+			padding: 45px;
+			background-color: #eeedf2;
+
+			@include media(allTouchDevice) {
+				padding: 10px 15px;
+			}
+		}
+
+		.right {
 			background-color: #eeedf2;
 		}
 	}
 
-	&.questionSection{
-		.left{
+	&.instructionSection{
+		background-color: var(--white);
+
+		.holder{
+			padding: 45px;
+		}
+	}
+
+	&.questionSection {
+		.left {
 			width: 30%;
 			overflow: hidden;
 			object-fit: cover;
 			position: relative;
-	
-			img{
+
+			img {
 				width: 100%;
 				height: 100%;
 				display: block;
 				object-fit: cover;
 				position: absolute;
 			}
+
+			@include media(allTouchDevice){
+				display: none;
+			}
 		}
-	
-		.right{
+
+		.right {
 			width: 70%;
 			padding: 45px;
+
+			@include media(allTouchDevice){
+				padding: 15px;
+				width: 100%;
+			}
 		}
-		
+
 		.title {
 			font-size: 20px;
+			position: relative;
 		}
-	
+
 		.description {
 			font-size: 16px;
 			font-weight: normal;
 		}
-	
-		.questionCount{
+
+		.questionCount {
 			border-bottom: 4px solid #000;
 			display: inline-block;
 			padding-bottom: 5px;
 		}
-	
-		.timer{
+
+		.timer {
 			padding: 10px;
 			display: inline-block;
 			background-color: white;
 			margin-bottom: 20px;
 			font-weight: 600;
-	
-			svg{
+
+			svg {
 				vertical-align: middle;
 			}
 		}
-	
+
 		#options {
 			display: flex;
 			gap: 20px;
 			justify-content: center;
 			align-items: center;
-	
+
 			.btnTF {
 				width: 150px;
 				height: 150px;
@@ -244,13 +367,13 @@ main {
 				background-color: var(--tnf-background-color);
 				color: var(--tnf-text-color);
 				border: 2px solid var(--tnf-border-color);
-	
-				&:hover{
+
+				&:hover {
 					color: var(--tnf-text-hover-color);
 					background: var(--tnf-background-hover-color);
 					border-color: var(--tnf-border-hover-color);
 				}
-	
+
 				&:disabled {
 					cursor: default;
 					color: var(--tnf-text-disable-color);
@@ -259,17 +382,17 @@ main {
 				}
 			}
 		}
-	
+
 		.optionHolder {
 			padding: 0;
-	
+
 			.option {
 				margin: 0;
 				display: flex;
 				align-items: center;
 				font-weight: 600;
 			}
-	
+
 			span {
 				height: 44px;
 				width: 44px;
@@ -281,13 +404,13 @@ main {
 				font-size: 25px;
 				text-align: center;
 				line-height: 42px;
-	
+
 				&.active {
 					background-color: #22353c;
 					color: #fff;
 				}
 			}
-	
+
 			> li {
 				margin-top: 10px;
 				padding: 8px;
@@ -297,14 +420,14 @@ main {
 				display: flex;
 				gap: 10px;
 				cursor: pointer;
-	
+
 				&:hover {
 					span {
 						background-color: #22353c;
 						color: #fff;
 					}
 				}
-	
+
 				&.active {
 					span {
 						background-color: #22353c;
@@ -314,13 +437,14 @@ main {
 			}
 		}
 	}
-	
 
-	&.reviewSection{
+	&.reviewSection {
 		flex-direction: column;
 		padding: 45px;
+		overflow-y: auto;
+		background-color: var(--white);
 
-		.top{
+		.top {
 			background-color: var(--yellow);
 			display: flex;
 			padding: 30px 60px;
@@ -328,17 +452,17 @@ main {
 			gap: 20px;
 		}
 
-		button{
+		button {
 			font-size: 30px;
 		}
 
-		.left{
+		.left {
 			width: 30%;
 			overflow: hidden;
 			object-fit: cover;
 			position: relative;
-	
-			img{
+
+			img {
 				width: 100%;
 				height: 100%;
 				display: block;
@@ -346,73 +470,96 @@ main {
 				position: absolute;
 			}
 		}
-	
-		.right{
+
+		.right {
 			width: 70%;
 			padding: 45px;
 		}
+	}
 
-		#reviewHolder {
-			.answered {
-				padding: 5px 10px;
-				border-radius: 5px;
+	&.endSection{
+		.answered {
+			color: var(--success);
+		}
+	}
+
+	&.endSection {
+		background-color: var(--white);
+
+		.holder {
+			width: 100%;
+			padding: 45px;
+			overflow-y: auto;
+		}
+	}
+
+	.listing {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		background-color: white;
+		font-weight: 500;
+
+		.answered {
+			padding: 5px 10px;
+			border-radius: 5px;
+		}
+
+		.unanswered {
+			color: var(--danger);
+			padding: 5px 10px;
+			border-radius: 5px;
+		}
+
+		> li {
+			display: flex;
+			justify-content: space-between;
+			border: 1px solid #ccc;
+			border-bottom: none;
+			padding: 10px;
+			align-items: center;
+			gap: 20px;
+			cursor: pointer;
+
+			&:last-child {
+				border-bottom: 1px solid #ccc;
 			}
-	
-			.unanswered {
-				color: var(--danger);
-				padding: 5px 10px;
-				border-radius: 5px;
+
+			&:nth-child(even) {
+				background-color: #efefef;
 			}
-	
-			ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-				background-color: white;
-	
-				> li {
-					display: flex;
-					justify-content: space-between;
-					border: 1px solid #ccc;
-					border-bottom: none;
-					padding: 10px;
-					align-items: center;
-					gap: 20px;
-					cursor: pointer;
-	
-					&:last-child {
-						border-bottom: 1px solid #ccc;
-					}
-	
-					&:nth-child(even){
-						background-color: #efefef;
-					}
-				}
-				.header{
-					pointer-events: none;
-					background-color: var(--yellow);
-					padding: 10px 20px;
-					font-weight: 600;
-				}
-	
-				.content{
-					white-space: nowrap;
-					overflow: hidden;
-					text-overflow: ellipsis;
-	
-					svg{
-						vertical-align: middle;
-					}
-				}
+		}
+		.header {
+			pointer-events: none;
+			background-color: var(--yellow);
+			padding: 10px 20px;
+			font-weight: 600;
+		}
+
+		.content {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			svg {
+				vertical-align: middle;
 			}
 		}
 	}
 }
 
 footer {
+	@include media(allTouchDevice){
+		order: 2;
+		padding: 10px 15px;
+		margin-top: 56px;
+    	position: fixed;
+	}
+
 	padding: 10px 20px;
 	background-color: var(--footer-background-color);
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	border-top: 1px solid #ccc;
 }

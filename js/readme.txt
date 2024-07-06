@@ -1,7 +1,11 @@
 {
 	"time": 0,
     // not implemented yet
-
+	
+	byWeightage": false,
+	//if false then 1 point for each correct number.
+	//in case of true should be pick weightage by assigned value in question
+	
 	"score": 0,
     // not implemented yet
 
