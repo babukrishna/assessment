@@ -502,6 +502,10 @@ main {
 			&.correct{
 				background-color: var(--end-correct-background-color);
 			}
+
+			.selection{
+				font-size: 20px;
+			}
 		}
 
 		&.matching{
@@ -525,10 +529,12 @@ main {
 				border: 1px solid var(--black);
 				border-bottom: none;
 				padding: 10px;
+				display: flex;
+				gap: 20px;
 			}
 
 			select{
-				width: 100%;
+				width: 50px;
 			}
 
 			.selectLabel{
@@ -595,6 +601,14 @@ main {
 
 			svg {
 				vertical-align: middle;
+			}
+		}
+
+		.contentHolder{
+			&.open{
+				svg{
+					transform: rotate(90deg);
+				}
 			}
 		}
 	}

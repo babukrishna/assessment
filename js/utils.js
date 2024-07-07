@@ -27,4 +27,10 @@ class Utils {
 		tempArr[1] = 'q'+tempArr[1];
 		return tempArr;
 	}
+
+	convertMinutesToHours(minutes) {
+		let hours = Math.floor(minutes / 60);
+		let remainingMinutes = minutes % 60;
+		return `${hours} hour and ${remainingMinutes} minute`;
+	}
 }

@@ -16,7 +16,8 @@ class App {
 		this.description = this.selector(".quizHolder .description");
 		this.question = this.selector("#ques");
 		this.optionHolder = this.selector("#optionHolder");
-		// 
+		this.timer = this.selector('#timer');
+		// CTAs
 		this.previousBtn = this.selector("#prevCTA");
 		this.nextBtn = this.selector("#nextCTA");
 		this.submitTest = this.selector('#submitTest');
@@ -41,7 +42,7 @@ class App {
 		this.instructionSection = this.selector('.instructionSection');
 		// counter
 		this.counter = 0;
-		this.currentScreen = 'END_SCREEN';
+		this.currentScreen = 'QUIZ_SCREEN';
 
 		// some events added here
 		this.previousBtn.on("click", "", this.previousClickHandler.bind(this));
@@ -56,6 +57,20 @@ class App {
 		this.userName.setHTML(model.dataAll.userData.name);
 
 		this.pageLoader();
+		// this.timeManager()
+		
+
+	}
+
+	timeManager(){
+		let time = model.dataAll.time;
+		this.timer.setHTML(utils.convertMinutesToHours(time));
+
+		setInterval(function(){
+			time = --time;
+			this.timer.setHTML(utils.convertMinutesToHours(time))
+		}, 10000)
+		
 	}
 	
 	pageLoader(){
@@ -109,7 +124,20 @@ class App {
 
 	reviewQuestionClickHandler(e) {
 		if(this.currentScreen === 'END_SCREEN'){
-			console.log(+e.getAttribute("data-index"))
+			const target = e.querySelector('.optionHolder');
+			const contentHolder = e.querySelector('.contentHolder');
+
+			if(contentHolder.class('open')){
+				contentHolder.removeClass('open')
+			}else{
+				contentHolder.addClass('open')
+			}
+			
+			if(target.class('hide')){
+				target.removeClass('hide')
+			}else{
+				target.addClass('hide')
+			}
 		} else {
 			this.counter = +e.getAttribute("data-index");
 			this.currentScreen = 'QUIZ_SCREEN';
@@ -153,70 +181,6 @@ class App {
 	}
 	
 	reviewQuestionList() {
-		const attemptQuestion = (id) => {
-			let isMatched = false;
-			let tempBoolean = true;
-			const categoryID = utils.getCategoryAndQuestionId(id)[0];
-			const questionID = utils.getCategoryAndQuestionId(id)[1];
-
-			const tempCid = model.getUserAttemptQuestions[categoryID];
-			const tempQid = tempCid && tempCid[questionID];
-			
-			if(this.currentScreen === 'REVIEW_SCREEN'){
-				isMatched = (tempCid && tempQid);
-			} else {
-				if(tempCid && tempQid){
-					model.dataAll.set[categoryID][questionID].options.map( item => {
-						if(model.dataAll.set[categoryID][questionID].type === 'matching'){
-							if(tempBoolean){
-								isMatched = (tempQid[item.optionId] === item.isCorrect);
-								tempBoolean = isMatched;
-							}
-						} else {
-							for(let i=0; i < tempQid.length; i++){
-								if(item.optionId === Number(tempQid[i]) && tempBoolean){
-									isMatched = (item.isCorrect === 1);
-									tempBoolean = isMatched;
-								}
-							}
-						}
-					})
-				}
-			}
-			return isMatched;
-		}
-
-		const questionOptions = (id) => {
-			const alphbetArray = ["A", "B", "C", "D", "E"];
-
-			const categoryID = utils.getCategoryAndQuestionId(id)[0];
-			const questionID = utils.getCategoryAndQuestionId(id)[1];
-
-			const tempCid = model.getUserAttemptQuestions[categoryID];
-			const tempQid = tempCid && tempCid[questionID];
-			const options = model.dataAll.set[categoryID][questionID].options;
-			console.log(tempQid)
-
-			const isCorrect = (item) => {
-				
-			}
-
-			return `<ul id="optionHolder" class="optionHolder">
-				${options
-					.map(
-						(item, index) => `<li 
-								uid="${item.optionId}" 
-								n="${item.isCorrect}" 
-								class="${item.isCorrect === 1 ? 'correct' : ''} ${isCorrect(item) ? 'active' : ''}">
-							<span class="bullet">${alphbetArray[index]}</span>
-							<p class="option">${item.option}</p>
-						</li>`
-					)
-					.join("")
-				}
-			</ul>`
-		}
-		
 		let str = model.getUserQuestionsSetId
 			.map(
 				(item, index) =>
@@ -226,12 +190,10 @@ class App {
 								<svg width="25px" height="25px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="icomoon-ignore"></g><path d="M2.639 15.992c0 7.366 5.97 13.337 13.337 13.337s13.337-5.97 13.337-13.337-5.97-13.337-13.337-13.337-13.337 5.97-13.337 13.337zM28.245 15.992c0 6.765-5.504 12.27-12.27 12.27s-12.27-5.505-12.27-12.27 5.505-12.27 12.27-12.27c6.765 0 12.27 5.505 12.27 12.27z" fill="#000000"></path><path d="M19.159 16.754l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z" fill="#000000"></path></svg>
 								${index+1}. ${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}
 							</div>
-							${questionOptions(item)}
+							${this.getQuestionOptionsFormation(item)}
 						</div>
-						<div class="${attemptQuestion(item) ? 'answered' : 'unanswered'}">
-							${attemptQuestion(item) ? 
-								`${(this.currentScreen === 'REVIEW_SCREEN') ? 'Answered': 'Correct'}` : 
-								`${(this.currentScreen === 'REVIEW_SCREEN') ? 'Unanswered': 'Incorrect'}`}
+						<div class="${this.getAttemptQuestion(item) ? 'answered' : 'unanswered'}">
+							${this.getListLabel(this.getAttemptQuestion(item))}
 						</div>
 					</li>`
 			)
@@ -243,16 +205,113 @@ class App {
 					</li> ${str}`;
 	}
 
+	getQuestionOptionsFormation(id){
+		if(this.currentScreen !== 'END_SCREEN'){
+			return '';
+		}
+
+		const alphbetArray = ["A", "B", "C", "D", "E"];
+
+		const categoryID = utils.getCategoryAndQuestionId(id)[0];
+		const questionID = utils.getCategoryAndQuestionId(id)[1];
+
+		const tempCid = model.getUserAttemptQuestions[categoryID];
+		const tempQid = tempCid && tempCid[questionID];
+		const options = model.dataAll.set[categoryID][questionID].options;
+		const type = model.dataAll.set[categoryID][questionID].type;
+		const dropdown = model.dataAll.set[categoryID][questionID].dropdown;
+
+		const userSelected = (item) => {
+			let isSelected = false;
+
+			if(type === 'matching' && item){
+				if(tempQid){
+					isSelected = (+tempQid[item.optionId] === item.isCorrect)
+				}
+			} else {
+				if(tempQid){
+					tempQid.map( i => {
+						isSelected = (item.optionId === Number(i))
+					})
+				}
+			}
+			return isSelected;
+		}
+
+		return `<ul class="optionHolder hide">
+			${options
+				.map(
+					(item, index) => `<li 
+							uid="${item.optionId}" 
+							n="${item.isCorrect}" 
+							class="
+								${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
+								${userSelected(item) ? 'active' : ''}
+								${(userSelected(item) && (type === 'matching')) ? 'correct' : ''}">
+						<span class="bullet">${alphbetArray[index]}</span>
+						<p class="option">
+							${item.option}
+							${(type === 'matching') ? `( <i class="selection">${dropdown[item.isCorrect]}</i> )` : '' }</p>
+					</li>`
+				)
+				.join("")
+			}
+		</ul>`
+	}
+
+	getAttemptQuestion(id){
+		let isMatched = false;
+		let tempBoolean = true;
+		const categoryID = utils.getCategoryAndQuestionId(id)[0];
+		const questionID = utils.getCategoryAndQuestionId(id)[1];
+
+		const tempCid = model.getUserAttemptQuestions[categoryID];
+		const tempQid = tempCid && tempCid[questionID];
+		
+		if(this.currentScreen === 'REVIEW_SCREEN'){
+			isMatched = (tempCid && tempQid);
+		} else {
+			if(tempCid && tempQid){
+				model.dataAll.set[categoryID][questionID].options.map( item => {
+					if(model.dataAll.set[categoryID][questionID].type === 'matching'){
+						if(tempBoolean){
+							isMatched = (+tempQid[item.optionId] === item.isCorrect);
+							tempBoolean = isMatched;
+						}
+					} else {
+						for(let i=0; i < tempQid.length; i++){
+							if(item.optionId === Number(tempQid[i]) && tempBoolean){
+								isMatched = (item.isCorrect === 1);
+								tempBoolean = isMatched;
+							}
+						}
+					}
+				})
+			}
+		}
+		return isMatched;
+	}
+
+	getListLabel(value){
+		if(value){
+			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Answered': 'Correct';
+		} else {
+			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Unanswered': 'Incorrect';
+		}
+	}
+
 	matchingFormation(){
 		const $this = this;
 		this.optionHolder.addClass('matching');
-		const alphbetArray = ["A", "B", "C", "D", "E"];
-		const alphbetArraySmall = ["a", "b", "c", "d", "e"];
+		const alphbetArray = model.dataAll.set[model.getCurrentCategoryId][model.getCurrentQuestionId].bulletPoint;
+		const numberArray = [0, 1, 2, 3, 5, 6, 7];
+		const dropdown = model.dataAll.set[model.getCurrentCategoryId][model.getCurrentQuestionId].dropdown;
 		this.selectedOption = new Array(model.getCurrentOptions.length).fill(null);
 
 		// enable / disable as per previous selection
 		const tempCid = model.getUserAttemptQuestions[model.getCurrentCategoryId];
 		const activeOptions = (tempCid && tempCid[model.getCurrentQuestionId]) ? tempCid[model.getCurrentQuestionId] : [];
+		this.selectedOption = (activeOptions.length !== 0) ? activeOptions : this.selectedOption;
 		
 		this.optionHolder.setHTML(
 			model.getCurrentOptions
@@ -260,17 +319,15 @@ class App {
 					(item, index) => `<li>
 						<div class="selectBoxHolder">
 							<select uid="${item.optionId}">
-								${activeOptions.length === 0 && `<option>Select</option>`}
-								${item.dropdown.map((item, i) => `<option ${activeOptions[index] === alphbetArraySmall[i] && 'selected'} value="${alphbetArraySmall[i]}">${item}</option>`).join("")}
+								${activeOptions.length === 0 && `<option></option>`}
+								${dropdown.map((item, i) => `<option ${(+activeOptions[index] === numberArray[i]) && 'selected'} value="${numberArray[i]}">${alphbetArray[i]}</option>`).join("")}
 							</select>
+							<div>${dropdown[index]}</div>
 						</div>
 						<div class="selectLabel">${alphbetArray[index]}. ${item.option}</div>
 					</li>`
-				)
-				.join("")
+				).join("")
 		);
-
-		
 
 		this.selector('#optionHolder .selectBoxHolder select').forEach( item => {
 			item.addEventListener('change', function(e){
@@ -379,15 +436,12 @@ class App {
 		this.optionHolder.setHTML(
 			model.getCurrentOptions
 				.map(
-					(item, index) => `<li 
-							uid="${item.optionId}" 
-							n="${item.isCorrect}" 
+					(item, index) => `<li uid="${item.optionId}" n="${item.isCorrect}" 
 							class="${(String(activeOptions).match(item.optionId) !== null) ? 'active' : ''}">
 						<span class="bullet">${alphbetArray[index]}</span>
 						<p class="option">${item.option}</p>
 					</li>`
-				)
-				.join("")
+				).join("")
 		);
 	}
 
