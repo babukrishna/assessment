@@ -495,23 +495,27 @@
 				"options": [
 					{
 						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Installing the inverter"
+						"isCorrect": "d",
+						"option": "Pressure to push the electrical flow.",
+						"dropdown": ["Volts", "Amps", "Watts", "Ohms"]
 					},
 					{
 						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Running tech cable"
+						"isCorrect": "c",
+						"option": "Resistance within a circuit.",
+						"dropdown": ["Volts", "Amps", "Watts", "Ohms"]
 					},
 					{
 						"optionId": 2,
-						"isCorrect": 1,
-						"option": "Mounting the racking for the solar array"
+						"isCorrect": "a",
+						"option": "Work being done",
+						"dropdown": ["Volts", "Amps", "Watts", "Ohms"]
 					},
 					{
 						"optionId": 3,
-						"isCorrect": 0,
-						"option": "Attaching you fall arrest harness"
+						"isCorrect": "b",
+						"option": "Flow of current",
+						"dropdown": ["Volts", "Amps", "Watts", "Ohms"]
 					}
 				]
 			}

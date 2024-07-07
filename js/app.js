@@ -41,7 +41,7 @@ class App {
 		this.instructionSection = this.selector('.instructionSection');
 		// counter
 		this.counter = 0;
-		this.currentScreen = 'INTRO_SCREEN';
+		this.currentScreen = 'QUIZ_SCREEN';
 
 		// some events added here
 		this.previousBtn.on("click", "", this.previousClickHandler.bind(this));
@@ -71,7 +71,14 @@ class App {
 				this.totalQuestionCount.setHTML(model.getUserQuestionsSetId.length);
 				this.questionSection.removeClass('hide');
 
-				model.getCurrentQuestionType === "tnf" ? this.tnfFormation() : this.mmcqFormation();
+				this.optionHolder.removeClass('matching');
+				if(model.getCurrentQuestionType === "tnf"){
+					this.tnfFormation();
+				}else if(model.getCurrentQuestionType === "matching"){
+					this.matchingFormation();
+				}else{
+					this.mmcqFormation();
+				}
 
 				this.question.setHTML(model.getCurrentQuestion);
 				this.nextBtn.disabled = this.counter > model.getUserQuestionsSetId.length - 2;
@@ -143,6 +150,7 @@ class App {
 	reviewQuestionList() {
 		const attemptQuestion = (id) => {
 			let isMatched = false;
+			let tempBoolean = true;
 			const categoryID = utils.getCategoryAndQuestionId(id)[0];
 			const questionID = utils.getCategoryAndQuestionId(id)[1];
 
@@ -154,18 +162,25 @@ class App {
 			} else {
 				if(tempCid && tempQid){
 					model.dataAll.set[categoryID][questionID].options.map( item => {
-						tempQid.map( i => {
-							if(Number(i) === Number(item.optionId)){
-								isMatched = (item.isCorrect === 1)
+						if(model.dataAll.set[categoryID][questionID].type === 'matching'){
+							if(tempBoolean){
+								isMatched = (tempQid[item.optionId] === item.isCorrect);
+								tempBoolean = isMatched;
 							}
-						})
+						} else {
+							for(let i=0; i < tempQid.length; i++){
+								if(item.optionId === Number(tempQid[i]) && tempBoolean){
+									isMatched = (item.isCorrect === 1);
+									tempBoolean = isMatched;
+								}
+							}
+						}
 					})
 				}
 			}
-
 			return isMatched;
 		}
-
+		
 		let str = model.getUserQuestionsSetId
 			.map(
 				(item, index) =>
@@ -187,6 +202,53 @@ class App {
 						<div class="content">Question</div>
 						<div>Status</div>
 					</li> ${str}`;
+	}
+
+	matchingFormation(){
+		const $this = this;
+		this.optionHolder.addClass('matching');
+		const alphbetArray = ["A", "B", "C", "D", "E"];
+		const alphbetArraySmall = ["a", "b", "c", "d", "e"];
+		this.selectedOption = new Array(model.getCurrentOptions.length).fill(null);
+
+		// enable / disable as per previous selection
+		const tempCid = model.getUserAttemptQuestions[model.getCurrentCategoryId];
+		const activeOptions = (tempCid && tempCid[model.getCurrentQuestionId]) ? tempCid[model.getCurrentQuestionId] : [];
+		
+		this.optionHolder.setHTML(
+			model.getCurrentOptions
+				.map(
+					(item, index) => `<li>
+						<div class="selectBoxHolder">
+							<select uid="${item.optionId}">
+								${activeOptions.length === 0 && `<option>Select</option>`}
+								${item.dropdown.map((item, i) => `<option ${activeOptions[index] === alphbetArraySmall[i] && 'selected'} value="${alphbetArraySmall[i]}">${item}</option>`).join("")}
+							</select>
+						</div>
+						<div class="selectLabel">${alphbetArray[index]}. ${item.option}</div>
+					</li>`
+				)
+				.join("")
+		);
+
+		
+
+		this.selector('#optionHolder .selectBoxHolder select').forEach( item => {
+			item.addEventListener('change', function(e){
+				let firstOption = e.currentTarget.querySelector('option');
+				if (firstOption && firstOption.textContent === 'Select') {
+					firstOption.remove();
+				}
+
+				$this.selectedOption[e.currentTarget.getAttribute('uid')] = e.currentTarget.value;
+
+				model.setUserAttemptQuestions = { 
+					"cid": model.getCurrentCategoryId, 
+					"qid": model.getCurrentQuestionId, 
+					"oid": $this.selectedOption
+				}
+			})
+		})
 	}
 
 	tnfFormation() {
