@@ -41,13 +41,14 @@ class App {
 		this.instructionSection = this.selector('.instructionSection');
 		// counter
 		this.counter = 0;
-		this.currentScreen = 'QUIZ_SCREEN';
+		this.currentScreen = 'END_SCREEN';
 
 		// some events added here
 		this.previousBtn.on("click", "", this.previousClickHandler.bind(this));
 		this.nextBtn.on("click", "", this.nextClickHandler.bind(this));
 		this.reviewBtn.on("click", "", this.reviewFormation.bind(this));
 		this.reviewQuestion.on("click","LI", $this.reviewQuestionClickHandler.bind(this));
+		this.endQuestionList.on("click","LI", $this.reviewQuestionClickHandler.bind(this));
 		this.submitTest.on("click", "", this.endScreenFormation.bind(this));
 		// header dom
 		this.chapterSubtitle.setHTML(model.dataAll.chapterSubtitle);
@@ -107,9 +108,13 @@ class App {
 	}
 
 	reviewQuestionClickHandler(e) {
-		this.counter = +e.getAttribute("data-index");
-		this.currentScreen = 'QUIZ_SCREEN';
-		this.pageLoader();
+		if(this.currentScreen === 'END_SCREEN'){
+			console.log(+e.getAttribute("data-index"))
+		} else {
+			this.counter = +e.getAttribute("data-index");
+			this.currentScreen = 'QUIZ_SCREEN';
+			this.pageLoader();
+		}
 	}
 
 	previousClickHandler() {
@@ -180,14 +185,48 @@ class App {
 			}
 			return isMatched;
 		}
+
+		const questionOptions = (id) => {
+			const alphbetArray = ["A", "B", "C", "D", "E"];
+
+			const categoryID = utils.getCategoryAndQuestionId(id)[0];
+			const questionID = utils.getCategoryAndQuestionId(id)[1];
+
+			const tempCid = model.getUserAttemptQuestions[categoryID];
+			const tempQid = tempCid && tempCid[questionID];
+			const options = model.dataAll.set[categoryID][questionID].options;
+			console.log(tempQid)
+
+			const isCorrect = (item) => {
+				
+			}
+
+			return `<ul id="optionHolder" class="optionHolder">
+				${options
+					.map(
+						(item, index) => `<li 
+								uid="${item.optionId}" 
+								n="${item.isCorrect}" 
+								class="${item.isCorrect === 1 ? 'correct' : ''} ${isCorrect(item) ? 'active' : ''}">
+							<span class="bullet">${alphbetArray[index]}</span>
+							<p class="option">${item.option}</p>
+						</li>`
+					)
+					.join("")
+				}
+			</ul>`
+		}
 		
 		let str = model.getUserQuestionsSetId
 			.map(
 				(item, index) =>
 					`<li data-index="${index}">
 						<div class="content">
-							<svg width="25px" height="25px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="icomoon-ignore"></g><path d="M2.639 15.992c0 7.366 5.97 13.337 13.337 13.337s13.337-5.97 13.337-13.337-5.97-13.337-13.337-13.337-13.337 5.97-13.337 13.337zM28.245 15.992c0 6.765-5.504 12.27-12.27 12.27s-12.27-5.505-12.27-12.27 5.505-12.27 12.27-12.27c6.765 0 12.27 5.505 12.27 12.27z" fill="#000000"></path><path d="M19.159 16.754l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z" fill="#000000"></path></svg>
-							${index+1}. ${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}
+							<div class="contentHolder">
+								<svg width="25px" height="25px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="icomoon-ignore"></g><path d="M2.639 15.992c0 7.366 5.97 13.337 13.337 13.337s13.337-5.97 13.337-13.337-5.97-13.337-13.337-13.337-13.337 5.97-13.337 13.337zM28.245 15.992c0 6.765-5.504 12.27-12.27 12.27s-12.27-5.505-12.27-12.27 5.505-12.27 12.27-12.27c6.765 0 12.27 5.505 12.27 12.27z" fill="#000000"></path><path d="M19.159 16.754l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z" fill="#000000"></path></svg>
+								${index+1}. ${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}
+							</div>
+							${questionOptions(item)}
 						</div>
 						<div class="${attemptQuestion(item) ? 'answered' : 'unanswered'}">
 							${attemptQuestion(item) ? 
