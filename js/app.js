@@ -57,20 +57,25 @@ class App {
 		this.userName.setHTML(model.dataAll.userData.name);
 
 		this.pageLoader();
-		// this.timeManager()
-		
-
+		this.timeManager()
 	}
 
 	timeManager(){
 		let time = model.dataAll.time;
 		this.timer.setHTML(utils.convertMinutesToHours(time));
+		const $this = this;
 
-		setInterval(function(){
+		const timeInterval = setInterval(function(){
 			time = --time;
-			this.timer.setHTML(utils.convertMinutesToHours(time))
+			$this.timer.setHTML(utils.convertMinutesToHours(time))
+			model.setUserRemainTime = time;
+
+			if(time === 0){
+				$this.currentScreen = 'END_SCREEN';
+				$this.pageLoader();
+				clearInterval(timeInterval);
+			}
 		}, 10000)
-		
 	}
 	
 	pageLoader(){
@@ -112,6 +117,10 @@ class App {
 			case 'END_SCREEN':
 				this.endingSection.removeClass('hide');
 				this.endQuestionList.setHTML(this.reviewQuestionList());
+
+				this.nextBtn.disabled = true;
+				this.previousBtn.disabled = true;
+				this.reviewBtn.disabled = true;
 				break;
 			case 'INSTRUCTION_SCREEN':
 				this.instructionSection.removeClass('hide');
@@ -132,7 +141,7 @@ class App {
 			}else{
 				contentHolder.addClass('open')
 			}
-			
+
 			if(target.class('hide')){
 				target.removeClass('hide')
 			}else{

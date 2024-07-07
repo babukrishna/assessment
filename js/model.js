@@ -7,8 +7,6 @@ class Model {
 		this.data = await this.loadMetadata();
 		this.createCategoriesList();
 		this.createQuestionsId();
-
-		this.userSpendTime = this.data.userData.spendTime;
 	}
 
 	//Loads the metadata file
@@ -125,11 +123,11 @@ class Model {
 		return this.data.userData.attemptQuestions;
 	}
 	//set user spend time
-	set setUserSpendTime(time){
-		this.userSpendTime = time;
+	set setUserRemainTime(time){
+		this.data.userData.remainTime = time;
 	}
 	//get user spend time
-	get setUserSpendTime(){
-		return this.userSpendTime;
+	get setUserRemainTime(){
+		return this.data.userData.remainTime;
 	}
 }
