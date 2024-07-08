@@ -19,7 +19,9 @@
 		"attemptQuestions": {},
 		"remainTime": 0,
 		"score": 0,
-		"bookmark": ""
+		"status": "incomplete",
+		"bookmark": {
+		}		
 	},
 	"categories": {
 		"c0": {
