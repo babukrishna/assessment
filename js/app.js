@@ -333,12 +333,14 @@ class App {
 							</select>
 							<div>${dropdown[index]}</div>
 						</div>
-						<div class="selectLabel">${alphbetArray[index]}. ${item.option}</div>
+						<div class="selectLabel" sid="">${alphbetArray[index]}. ${item.option}</div>
 					</li>`
 				).join("")
 		);
 
+		const selectionArr = [];
 		this.selector('#optionHolder .selectBoxHolder select').forEach( item => {
+			selectionArr.push(null)
 			item.addEventListener('change', function(e){
 				let firstOption = e.currentTarget.querySelector('option');
 				if (firstOption && firstOption.textContent === 'Select') {
@@ -346,6 +348,17 @@ class App {
 				}
 
 				$this.selectedOption[e.currentTarget.getAttribute('uid')] = e.currentTarget.value;
+				
+				selectionArr[Number(e.currentTarget.getAttribute('uid'))] = e.currentTarget.value;
+				const duplicateArr = $this.findDuplicateIndexes(selectionArr);
+				Object.keys(duplicateArr).map( i => {
+					/* if(i !== null){
+
+					} */
+				})
+
+
+				e.currentTarget.parentNode.parentNode.querySelector('.selectLabel').setAttr('sid', e.currentTarget.value)
 
 				model.setUserAttemptQuestions = { 
 					"cid": model.getCurrentCategoryId, 
@@ -354,6 +367,26 @@ class App {
 				}
 			})
 		})
+	}
+
+	findDuplicateIndexes(arr) {
+		let duplicates = {};
+		arr.forEach((item, index) => {
+			if (duplicates[item]) {
+				duplicates[item].push(index);
+			} else {
+				duplicates[item] = [index];
+			}
+		});
+	
+		let result = {};
+		for (let key in duplicates) {
+			if (duplicates[key].length > 1) {
+				result[key] = duplicates[key];
+			}
+		}
+	
+		return result;
 	}
 
 	tnfFormation() {
