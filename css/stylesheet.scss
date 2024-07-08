@@ -14,6 +14,7 @@
 	--white: #fff;
 	--black: #000;
 	--yellow: #ffdd0c;
+	--gray: #e3e1e6;
 	// header config
 	--chapter-title-background-color: #ffdd0c;
 	--chapter-title-text-color: black;
@@ -28,7 +29,7 @@
 	--cta-background-hover-color: var(--white);
 	--cta-text-hover-color: var(--danger);
 	// main config
-	--main-background-color: #e3e1e6;
+	--main-background-color: var(--gray);
 
 	// tnf CTA config
 	--tnf-background-color: var(--white);
@@ -64,6 +65,9 @@ html {
 
 .textCenter {
 	text-align: center;
+}
+.textDanger{
+	color: var(--danger);
 }
 
 .desktopOnly {
@@ -146,14 +150,17 @@ button {
 }
 
 .mainContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 
 	.section {
 		max-width: 1440px;
 		width: 100%;
 		height: 700px;
+		padding: 0 5px;
 
 		@include media(allTouchDevice){
 			display: flex;
@@ -273,7 +280,14 @@ main {
 
 		.left {
 			padding: 45px;
+			width: 40%;
 			background-color: #eeedf2;
+
+			h1{
+				font-weight: 500;
+    			font-size: 5em;
+				margin: 0;
+			}
 
 			@include media(allTouchDevice) {
 				padding: 10px 15px;
@@ -282,6 +296,20 @@ main {
 
 		.right {
 			background-color: #eeedf2;
+			width: 60%;
+		}
+
+		.whiteBox{
+			background-color: var(--white);
+			padding: 10px 20px;
+			display: inline-block;
+			font-size: 20px;
+
+			img{
+				width: 60px;
+				vertical-align: middle;
+				margin-right: 10px;
+			}
 		}
 	}
 
@@ -395,12 +423,12 @@ main {
 			background-color: var(--yellow);
 			display: flex;
 			padding: 30px 60px;
-			font-size: 40px;
+			font-size: 45px;
 			gap: 20px;
 		}
 
 		button {
-			font-size: 30px;
+			font-size: 40px;
 		}
 
 		.left {
@@ -424,12 +452,6 @@ main {
 		}
 	}
 
-	&.endSection{
-		.answered {
-			color: var(--success);
-		}
-	}
-
 	&.endSection {
 		background-color: var(--white);
 
@@ -445,6 +467,10 @@ main {
 			>li{
 				pointer-events: none;
 			}
+		}
+
+		.answered {
+			color: var(--success);
 		}
 	}
 
@@ -522,6 +548,12 @@ main {
 				border: 0;
 				margin: 0;
 				gap: 0;
+
+				&.conflict{
+					img{
+						opacity: 1;
+					}
+				}
 			}
 
 			.selectBoxHolder{
@@ -542,6 +574,15 @@ main {
 				border-top: 1px solid var(--black);
 				border-right: 1px solid var(--black);
 				padding: 10px 20px;
+
+				display: flex;
+				align-items: center;
+				gap: 5px;
+
+				img{
+					width: 15px;
+					opacity: 0;
+				}
 			}
 		}
 	}
@@ -577,12 +618,20 @@ main {
 			border: 1px solid #ccc;
 			border-bottom: none;
 
+			&:hover{
+				background-color: #faf2c0;
+			}
+
 			&:last-child {
 				border-bottom: 1px solid #ccc;
 			}
 
 			&:nth-child(even) {
 				background-color: #efefef;
+
+				&:hover{
+					background-color: #faf2c0;
+				}
 			}
 		}
 

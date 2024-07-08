@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="mainContainer">
-      <section class="section">
+      <section id="container" class="section">
         <header>
           <div class="chapter">
             <div class="title">Engineering</div>
@@ -29,6 +29,7 @@
           <!-- intro section -->
           <main class="container introSection hide">
             <div class="left">
+              <p class="whiteBox"><img src="./img/Assessment_icon.png" style="width: 60px;" />MODULE 1 PRE-ASSESSMENT</p>
               <h1>Solar Theroy and General Knowledge</h1>
             </div>
             <div class="right">
@@ -40,7 +41,7 @@
           <!-- instruction section -->
           <main class="container instructionSection hide">
             <div class="holder">
-            <h3 class="textCenter">Instruction</h3>
+            <h2 class="textCenter textDanger" style="margin-top: 0;">Course Instruction</h2>
               <p>
                 Laboris cillum consequat consectetur non fugiat adipisicing
                 culpa in amet est fugiat voluptate. Sunt sint dolore occaecat
@@ -126,11 +127,12 @@
               </section>
               <button id="submitTest">Submit Test</button>
             </div>
+            <br/><br/>
             <div id="reviewHolder">
               <p class="textCenter">
-                <strong>Wish to review your answers?</strong> Click on any
-                question to navigation to it.
+                <strong>Wish to review your answers?</strong> Click on any question to navigation to it.
               </p>
+              <br/>
               <ul class="reviewQuestionList listing"></ul>
             </div>
           </main>
@@ -138,9 +140,10 @@
           <!-- end section -->
           <main class="container endSection hide">
             <div class="holder">
-              <h1 class="textCenter">Well Done</h1>
+              <p class="textCenter"><img src="./img/weldone.png" style="width:150px;"/></p>
+              <h2 class="textCenter textDanger">Well Done! You have scored <span id="score">60</span>%</h2>
               <p class="textCenter">
-                You can now close the window and attempt another assessment
+                You can chlose this window and take another pre-assessment or go to your training eLearning. <br/> To see how you did, click on nay question to expand it and see the correct answers
               </p>
               <br />
               <ul class="endQuestionList listing"></ul>

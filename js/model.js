@@ -127,7 +127,15 @@ class Model {
 		this.data.userData.remainTime = time;
 	}
 	//get user spend time
-	get setUserRemainTime(){
+	get getUserRemainTime(){
 		return this.data.userData.remainTime;
+	}
+	//set user score
+	set setUserScore(score){
+		this.data.userData.score = score;
+	}
+	//get user score
+	get getUserScore(){
+		return this.data.userData.score;
 	}
 }

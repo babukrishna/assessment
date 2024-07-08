@@ -1,0 +1,277 @@
+/* @import "./../css/normalizer.scss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
+@import "../css/mixins.scss";
+
+/* * {
+	box-sizing: border-box;
+} */
+
+/* :root {
+	--body-background-color: #282828;
+	--header-background-color: #363435;
+	--danger: #e03337;
+	--success: #61a654;
+	--white: #fff;
+	--black: #000;
+	--yellow: #ffdd0c;
+	// header config
+	--chapter-title-background-color: #ffdd0c;
+	--chapter-title-text-color: black;
+	--chapter-subtitle-background-color: #363435;
+	--chapter-subtitle-text-color: white;
+	--username-text-color: white;
+	// button config
+	--cta-border-color: var(--danger);
+	--cta-border-hover-color: var(--danger);
+	--cta-background-color: var(--danger);
+	--cta-text-color: var(--white);
+	--cta-background-hover-color: var(--white);
+	--cta-text-hover-color: var(--danger);
+	// main config
+	--main-background-color: #e3e1e6;
+
+	// tnf CTA config
+	--tnf-background-color: var(--white);
+	--tnf-border-color: #20252f;
+	--tnf-text-color: var(--black);
+	--tnf-background-hover-color: var(--black);
+	--tnf-border-hover-color: #20252f;
+	--tnf-text-hover-color: var(--white);
+	--tnf-background-disable-color: var(--black);
+	--tnf-border-disable-color: #20252f;
+	--tnf-text-disable-color: var(--white);
+	// end screen
+	--end-correct-background-color: #4ce052;
+	// footer config
+	--footer-background-color: var(--white);
+} */
+
+
+.desktopOnly {
+	display: block;
+	@include media(allTouchDevice) {
+		display: none !important;
+	}
+}
+
+.mobileOnly {
+	display: none;
+	@include media(allTouchDevice) {
+		display: block;
+	}
+}
+
+.desktopOnlyInline {
+	display: inline-block;
+	@include media(allTouchDevice) {
+		display: none !important;
+	}
+}
+
+.mobileOnlyInline {
+	display: none;
+	@include media(allTouchDevice) {
+		display: inline-block;
+	}
+}
+
+button {
+	@include media(allTouchDevice){
+		padding: 5px 10px;
+		font-size: 17px;
+	}
+}
+
+.mainContainer {
+	.section {
+		@include media(allTouchDevice){
+			display: flex;
+			flex-flow: row;
+			height: 100vh;
+			background-color: var(--main-background-color);
+            padding: 0;
+		}
+	}
+}
+
+header {
+	@include media(allTouchDevice) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		order: 1;
+	}
+
+	.chapter {
+		.title {
+			@include media(allTouchDevice) {
+				display: none;
+			}
+		}
+
+		.subtitle {
+			@include media(allTouchDevice) {
+				padding: 10px 15px;
+				font-size: 16px;
+				font-weight: 400;
+				height: 56px;
+			}
+		}
+	}
+
+	.user {
+		@include media(allTouchDevice) {
+			display: none;
+		}
+	}
+}
+
+.main{
+	@include media(allTouchDevice){
+		order: 3;
+		margin-top: 110px;
+	}
+}
+
+main {
+    @include media(allTouchDevice) {
+        height: auto;
+    }
+
+	&.introSection {
+		@include media(allTouchDevice) {
+			flex-direction: column;
+		}
+
+		.left {
+			@include media(allTouchDevice) {
+				padding: 15px;
+                width: 100%;
+			}
+
+            h1{
+                @include media(allTouchDevice) {
+                    font-size: 3.5em;
+                }   
+            }
+		}
+
+        .right{
+            width: 100%;
+        }
+
+        .whiteBox{
+            @include media(allTouchDevice) {
+                font-size: 14px;
+                margin-top: 0;
+            }
+        }
+	}
+
+	&.instructionSection{
+        @include media(allTouchDevice){
+            height: 100%;
+        }
+
+        .holder{
+            @include media(allTouchDevice){
+                padding: 15px;
+            }
+        }
+		
+	}
+
+	&.questionSection {
+		.left {
+			@include media(allTouchDevice){
+				display: none;
+			}
+		}
+
+		.right {
+			@include media(allTouchDevice){
+				padding: 15px;
+				width: 100%;
+			}
+		}
+	}
+
+	&.reviewSection {
+        @include media(allTouchDevice){
+            padding: 0;
+            height: 100%;
+        }
+
+        .top{
+            @include media(allTouchDevice){
+                padding: 15px;
+                flex-flow: column;
+                font-size: 25px;
+            }
+        }
+
+        button {
+            @include media(allTouchDevice){
+                font-size: 20px;
+                padding: 20px;
+            }
+		}
+
+        #reviewHolder{
+            @include media(allTouchDevice){
+                padding: 0 15px 20px;
+            }
+        }
+		
+	}
+
+	&.endSection {
+        @include media(allTouchDevice){
+            height: 100%;
+        }
+
+        .holder{
+            @include media(allTouchDevice){
+                padding: 15px;
+            }
+        }
+
+        .optionHolder{
+            @include media(allTouchDevice){
+                padding-left: 0;
+            }
+        }
+	}
+
+    .optionHolder{
+        .option{
+            @include media(allTouchDevice){
+                white-space: normal;
+            }
+        }
+    }
+
+    .listing{
+        >li{
+            @include media(allTouchDevice){
+                position: relative;
+            }
+        }
+
+        .unanswered, 
+        .answered{
+            position: absolute;
+            right: 0;
+        }
+    }
+}
+
+footer {
+	@include media(allTouchDevice){
+		order: 2;
+		padding: 10px 15px;
+		margin-top: 56px;
+    	position: fixed;
+        border-bottom: 1px solid var(--gray);
+	}
+}

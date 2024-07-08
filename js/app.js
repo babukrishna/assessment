@@ -34,6 +34,7 @@ class App {
 		this.chapterTitle = this.selector('.chapter .title');
 		this.chapterSubtitle = this.selector('.chapter .subtitle');
 		this.userName = this.selector('.user .userName');
+		this.score = this.selector('#score');
 		// all sections
 		this.introSection = this.selector('.introSection');
 		this.endingSection = this.selector('.endSection');
@@ -42,7 +43,7 @@ class App {
 		this.instructionSection = this.selector('.instructionSection');
 		// counter
 		this.counter = 0;
-		this.currentScreen = 'QUIZ_SCREEN';
+		this.currentScreen = 'INTRO_SCREEN';
 
 		// some events added here
 		this.previousBtn.on("click", "", this.previousClickHandler.bind(this));
@@ -57,25 +58,27 @@ class App {
 		this.userName.setHTML(model.dataAll.userData.name);
 
 		this.pageLoader();
-		this.timeManager()
 	}
 
 	timeManager(){
-		let time = model.dataAll.time;
-		this.timer.setHTML(utils.convertMinutesToHours(time));
-		const $this = this;
+		if(!this.isTimerStart){
+			this.isTimerStart = true;
+			let time = model.dataAll.time;
+			this.timer.setHTML(utils.convertMinutesToHours(time));
+			const $this = this;
 
-		const timeInterval = setInterval(function(){
-			time = --time;
-			$this.timer.setHTML(utils.convertMinutesToHours(time))
-			model.setUserRemainTime = time;
+			const timeInterval = setInterval(function(){
+				time = --time;
+				$this.timer.setHTML(utils.convertMinutesToHours(time))
+				model.setUserRemainTime = time;
 
-			if(time === 0){
-				$this.currentScreen = 'END_SCREEN';
-				$this.pageLoader();
-				clearInterval(timeInterval);
-			}
-		}, 10000)
+				if(time === 0){
+					$this.currentScreen = 'END_SCREEN';
+					$this.pageLoader();
+					clearInterval(timeInterval);
+				}
+			}, 10000)
+		}
 	}
 	
 	pageLoader(){
@@ -105,6 +108,7 @@ class App {
 				this.nextBtn.disabled = this.counter > model.getUserQuestionsSetId.length - 2;
 				this.previousBtn.disabled = this.counter === 0;
 				this.reviewBtn.disabled = false;
+				this.timeManager();
 				break;
 			case 'REVIEW_SCREEN':
 				this.reviewSection.removeClass('hide');
@@ -182,6 +186,7 @@ class App {
 	endScreenFormation(){
 		this.currentScreen = 'END_SCREEN';
 		this.pageLoader();
+		this.score.setHTML((model.dataAll.passingScore * model.getUserScore) / 100);
 	}
 
 	reviewFormation() {
@@ -197,7 +202,7 @@ class App {
 						<div class="content">
 							<div class="contentHolder">
 								<svg width="25px" height="25px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="icomoon-ignore"></g><path d="M2.639 15.992c0 7.366 5.97 13.337 13.337 13.337s13.337-5.97 13.337-13.337-5.97-13.337-13.337-13.337-13.337 5.97-13.337 13.337zM28.245 15.992c0 6.765-5.504 12.27-12.27 12.27s-12.27-5.505-12.27-12.27 5.505-12.27 12.27-12.27c6.765 0 12.27 5.505 12.27 12.27z" fill="#000000"></path><path d="M19.159 16.754l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z" fill="#000000"></path></svg>
-								${index+1}. ${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}
+								${index+1}<div class="desktopOnlyInline">. ${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}</div>
 							</div>
 							${this.getQuestionOptionsFormation(item)}
 						</div>
@@ -303,6 +308,9 @@ class App {
 
 	getListLabel(value){
 		if(value){
+			if(this.currentScreen === 'END_SCREEN'){
+				this.score = this.score + 1;
+			}
 			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Answered': 'Correct';
 		} else {
 			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Unanswered': 'Incorrect';
@@ -333,7 +341,10 @@ class App {
 							</select>
 							<div>${dropdown[index]}</div>
 						</div>
-						<div class="selectLabel" sid="">${alphbetArray[index]}. ${item.option}</div>
+						<div class="selectLabel" sid="">
+							<img src="./img/warning-svgrepo-com.svg" />
+							${alphbetArray[index]}. ${item.option}
+						</div>
 					</li>`
 				).join("")
 		);
@@ -342,21 +353,24 @@ class App {
 		this.selector('#optionHolder .selectBoxHolder select').forEach( item => {
 			selectionArr.push(null)
 			item.addEventListener('change', function(e){
+				const targetValue = e.currentTarget.value;
 				let firstOption = e.currentTarget.querySelector('option');
 				if (firstOption && firstOption.textContent === 'Select') {
 					firstOption.remove();
 				}
 
-				$this.selectedOption[e.currentTarget.getAttribute('uid')] = e.currentTarget.value;
-				
-				selectionArr[Number(e.currentTarget.getAttribute('uid'))] = e.currentTarget.value;
+				// check duplicate selection
+				$this.selectedOption[e.currentTarget.getAttribute('uid')] = targetValue;
+				selectionArr[Number(e.currentTarget.getAttribute('uid'))] = targetValue === "" ? null : targetValue;
+				document.querySelectorAll('#optionHolder li').forEach(function(elm){elm.removeClass('conflict')});
 				const duplicateArr = $this.findDuplicateIndexes(selectionArr);
 				Object.keys(duplicateArr).map( i => {
-					/* if(i !== null){
-
-					} */
+					if(i !== 'null'){
+						duplicateArr[i].map( j => {
+							document.querySelectorAll('#optionHolder li')[j].addClass('conflict');
+						});
+					}
 				})
-
 
 				e.currentTarget.parentNode.parentNode.querySelector('.selectLabel').setAttr('sid', e.currentTarget.value)
 
