@@ -10,13 +10,13 @@
             <entry>com.company.product.PRIMARYOBJASSE1</entry>
         </identifier>
         <title>
-            <string language="en-US">Assessment: Solar Build Construction Management</string>
+            <string language="en-US">Assessment: Engineering And Contractor</string>
         </title>
 		
         <language>en</language>
 
         <description>
-            <string language="en-US">Assessment: Solar Build Construction Management</string>
+            <string language="en-US">Assessment: Engineering And Contractor</string>
         </description>
 
     </general>
@@ -38,7 +38,7 @@
                 <dateTime>2016-11-23</dateTime>
                 <!-- Replace with the current time stamp when exporting from Captivate -->
                 <description>
-                    <string language="en-US">Assessment: Solar Build Construction Management</string>
+                    <string language="en-US">Assessment: Engineering And Contractor</string>
                 </description>
             </date>
         </contribute>
@@ -113,7 +113,7 @@
 
         <!-- Manifest->Course.Description. If that doesn't exist, replace with Project Information-> Description  (same as description above)-->
         <description>
-            <string>Assessment: Solar Build Construction Management</string>
+            <string>Assessment: Engineering And Contractor</string>
         </description>
 
         <!-- If you know the locale, enter it here, if not, remove this node (same as language above)-->
@@ -130,7 +130,7 @@
 
         <!-- Enter Project Information->Copyright here. If blank, omit the description. -->
         <description>
-            <string>Assessment: Solar Build Construction Management</string>
+            <string>Assessment: Engineering And Contractor</string>
         </description>
 
     </rights>

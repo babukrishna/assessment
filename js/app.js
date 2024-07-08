@@ -36,6 +36,8 @@ class App {
 		this.chapterSubtitle = this.selector('.chapter .subtitle');
 		this.userName = this.selector('.user .userName');
 		this.score = this.selector('#score');
+		this.pass = this.selector('.pass');
+		this.fail = this.selector('.fail');
 		// all sections
 		this.introSection = this.selector('.introSection');
 		this.endingSection = this.selector('.endSection');
@@ -44,8 +46,11 @@ class App {
 		this.instructionSection = this.selector('.instructionSection');
 		// counter
 		this.counter = 0;
-		this.currentScreen = 'INTRO_SCREEN';
-
+		this.currentScreen = model.getUserData('bookmark').split('&')[0];
+		if(model.getUserData('bookmark').split('&').length === 2){
+			this.counter = Number(model.getUserData('bookmark').split('&')[1])
+		}
+		
 		// some events added here
 		this.previousBtn.on("click", "", this.previousClickHandler.bind(this));
 		this.nextBtn.on("click", "", this.nextClickHandler.bind(this));
@@ -71,7 +76,7 @@ class App {
 			const timeInterval = setInterval(function(){
 				time = --time;
 				$this.timer.setHTML(utils.convertMinutesToHours(time))
-				model.setUserRemainTime = time;
+				model.setUserData('remainTime', time);
 
 				if(time === 0){
 					$this.currentScreen = 'END_SCREEN';
@@ -88,6 +93,10 @@ class App {
 		this.reviewSection.addClass('hide');
 		this.endingSection.addClass('hide');
 		this.instructionSection.addClass('hide');
+
+		this.nextBtn.disabled = true;
+		this.previousBtn.disabled = true;
+		this.reviewBtn.disabled = true;
 
 		switch (this.currentScreen) {
 			case 'QUIZ_SCREEN':
@@ -114,26 +123,35 @@ class App {
 			case 'REVIEW_SCREEN':
 				this.reviewSection.removeClass('hide');
 				this.reviewQuestion.setHTML(this.reviewQuestionList());
-				
-				this.nextBtn.disabled = true;
-				this.previousBtn.disabled = true;
-				this.reviewBtn.disabled = true;
 				break;
 			case 'END_SCREEN':
 				this.endingSection.removeClass('hide');
 				this.endQuestionList.setHTML(this.reviewQuestionList());
 
-				this.nextBtn.disabled = true;
-				this.previousBtn.disabled = true;
-				this.reviewBtn.disabled = true;
+				const scorePercentage = (model.getUserData('score') * 100) / model.getUserQuestionsSetId.length;
+				this.score.setHTML(scorePercentage);
+
+				if(scorePercentage >= model.dataAll.passingScorePercentage){
+					this.pass.removeClass('hide');
+					this.fail.addClass('hide');
+					model.setUserData('status', 'completed')
+				}else{
+					this.pass.addClass('hide');
+					this.fail.removeClass('hide');
+				}
 				break;
 			case 'INSTRUCTION_SCREEN':
 				this.instructionSection.removeClass('hide');
+				this.nextBtn.disabled = false;
 				break;
 			default:
 				this.introSection.removeClass('hide');
+				this.nextBtn.disabled = false;
 				break;
 		}
+
+		model.setUserData('bookmark', (this.currentScreen === 'QUIZ_SCREEN') ? `${this.currentScreen}&${this.counter}` : this.currentScreen);
+		this.setSCOData(); // update data on LMS
 	}
 
 	reviewQuestionClickHandler(e) {
@@ -187,7 +205,6 @@ class App {
 	endScreenFormation(){
 		this.currentScreen = 'END_SCREEN';
 		this.pageLoader();
-		this.score.setHTML((model.dataAll.passingScore * model.getUserScore) / 100);
 	}
 
 	reviewFormation() {
@@ -310,7 +327,7 @@ class App {
 	getListLabel(value){
 		if(value){
 			if(this.currentScreen === 'END_SCREEN'){
-				this.score = this.score + 1;
+				model.setUserData( 'score', model.getUserData('score') + 1);
 			}
 			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Answered': 'Correct';
 		} else {
@@ -532,10 +549,10 @@ class App {
 	setSCOData() {
 		if (scoData.trackingMode != null) {
 			//debugger;
-			scoData.setValue("lessonLocation", JSON.stringify(model.userData.bookmark));
-			scoData.setValue("suspendData", model.userData);
-			scoData.setValue("lessonStatus", model.userData.status);
-			scoData.setValue("score", model.userData.score);
+			scoData.setValue("lessonLocation", JSON.stringify(model.data.userData.bookmark));
+			scoData.setValue("suspendData", JSON.stringify(model.data.userData));
+			scoData.setValue("lessonStatus", model.data.userData.status);
+			scoData.setValue("score", model.data.userData.score);
 			scoData.commit();
 		}
 	}

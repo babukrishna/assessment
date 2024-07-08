@@ -7,20 +7,17 @@ class Model {
 		this.data = await this.loadMetadata();
 		
 		if (scoData.trackingMode != null) {
-			this.userData = {
-				...this.userData,
+			this.data.userData = {
+				...this.data.userData,
 				name: scoData.getValue("name"),
 			};
+
 			if (scoData.getValue("lessonStatus") != "not attempted" && scoData.getValue("lessonStatus") != "unknown") {
-				this.userData = {
-					...this.userData,
-					bookmark:
-						scoData.getValue("lessonLocation") === ""
-							? this.userData.bookmark
-							: JSON.parse(scoData.getValue("lessonLocation")),
-					score: scoData.getValue("score"),
-					status: scoData.getValue("lessonStatus"),
-					suspend: JSON.parse(scoData.getValue("suspendData")),
+				this.data.userData = JSON.parse(scoData.getValue("suspendData"));
+
+				this.data.userData = {
+					...this.data.userData,
+					name: scoData.getValue("name"),
 				};
 			}
 		}
@@ -155,21 +152,5 @@ class Model {
 	// get questions attempt by user
 	get getUserAttemptQuestions(){
 		return this.data.userData.attemptQuestions;
-	}
-	//set user spend time
-	set setUserRemainTime(time){
-		this.data.userData.remainTime = time;
-	}
-	//get user spend time
-	get getUserRemainTime(){
-		return this.data.userData.remainTime;
-	}
-	//set user score
-	set setUserScore(score){
-		this.data.userData.score = score;
-	}
-	//get user score
-	get getUserScore(){
-		return this.data.userData.score;
 	}
 }

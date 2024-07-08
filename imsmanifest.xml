@@ -19,10 +19,10 @@
   <organizations default="B0">
     <organization identifier="B0" adlseq:objectivesGlobalToSystem="false">
       <!--****** Title ******-->
-      <title>Assessment: Solar Build Construction Management</title>
+      <title>Assessment: Engineering And Contractor</title>
       <item identifier="i1" identifierref="r1" isvisible="true">
         <!--****** Title ******-->
-        <title>Assessment: Solar Build Construction Management</title>
+        <title>Assessment: Engineering And Contractor</title>
         <imsss:sequencing>
           <imsss:objectives>
             <imsss:primaryObjective objectiveID="PRIMARYOBJASSE1"/>

@@ -1,6 +1,6 @@
 {
 	"time": 90,
-	"passingScore": 20,
+	"passingScorePercentage": 80,
 	"numberOfQuestions": 10,
 	"byWeightage": false,
 	"questionSetFromCategories": [
@@ -20,8 +20,7 @@
 		"remainTime": 0,
 		"score": 0,
 		"status": "incomplete",
-		"bookmark": {
-		}		
+		"bookmark": "INTRO_SCREEN"
 	},
 	"categories": {
 		"c0": {
