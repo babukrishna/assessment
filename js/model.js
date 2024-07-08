@@ -5,6 +5,25 @@ class Model {
 	//Initializes model data
 	async init() {
 		this.data = await this.loadMetadata();
+		
+		if (scoData.trackingMode != null) {
+			this.userData = {
+				...this.userData,
+				name: scoData.getValue("name"),
+			};
+			if (scoData.getValue("lessonStatus") != "not attempted" && scoData.getValue("lessonStatus") != "unknown") {
+				this.userData = {
+					...this.userData,
+					bookmark:
+						scoData.getValue("lessonLocation") === ""
+							? this.userData.bookmark
+							: JSON.parse(scoData.getValue("lessonLocation")),
+					score: scoData.getValue("score"),
+					status: scoData.getValue("lessonStatus"),
+					suspend: JSON.parse(scoData.getValue("suspendData")),
+				};
+			}
+		}
 		this.createCategoriesList();
 		this.createQuestionsId();
 	}
@@ -18,7 +37,22 @@ class Model {
 	// Get all data
 	get dataAll() {
 		return this.data;
-	}	
+	}
+
+	//Returns user data
+	getUserData(k) {
+		return (k) ? this.data.userData[k] : this.data.userData;
+	}
+
+	//Sets user data
+	setUserData(k, v) {
+		this.data.userData[k] = v;
+	}
+
+	//Returns user data
+	setUserDataAll(v) {
+		this.data.userData = v;
+	}
 
 	createCategoriesList(){
 		this.categoryListArray = Object.keys(this.data.set);

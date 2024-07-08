@@ -3,6 +3,7 @@ class App {
 
 	//Initializes scorm and model
 	async init() {
+		scoData.initialize();
 		await model.init();
 		this.addListeners();
 		this.formation(model.dataAll);
@@ -526,6 +527,17 @@ class App {
 				detail: { test: "test" },
 			})
 		); */
+	}
+
+	setSCOData() {
+		if (scoData.trackingMode != null) {
+			//debugger;
+			scoData.setValue("lessonLocation", JSON.stringify(model.userData.bookmark));
+			scoData.setValue("suspendData", model.userData);
+			scoData.setValue("lessonStatus", model.userData.status);
+			scoData.setValue("score", model.userData.score);
+			scoData.commit();
+		}
 	}
 }
 

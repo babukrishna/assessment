@@ -1,12 +1,24 @@
+const scoData = new SCOData();
 const utils = new Utils();
 const model = new Model();
 const app = new App();
 app.init();
 
-/* window.addEventListener("CHAPTER_COMPLETED", this.chapterCompletedHandler.bind(this));
+
+/*window.addEventListener("CHAPTER_COMPLETED", this.chapterCompletedHandler.bind(this));
+
 function chapterCompletedHandler(event) {
     console.log("event.detail: ", event.detail);
 } */
+
+window.addEventListener("beforeunload", (e) => {
+    app.setSCOData();
+    e.preventDefault();
+});
+
+window.addEventListener("unload", (e) => {
+    scoData.finish();
+});
 
 // screen adopter
 var $el = document.querySelector("#container");
