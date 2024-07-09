@@ -17,6 +17,7 @@ class App {
 		this.description = this.selector(".quizHolder .description");
 		this.question = this.selector("#ques");
 		this.optionHolder = this.selector("#optionHolder");
+		this.optionHolderForMobile = this.selector("#optionHolderForMobile");
 		this.timer = this.selector('#timer');
 		// CTAs
 		this.previousBtn = this.selector("#prevCTA");
@@ -348,6 +349,12 @@ class App {
 		const activeOptions = (tempCid && tempCid[model.getCurrentQuestionId]) ? tempCid[model.getCurrentQuestionId] : [];
 		this.selectedOption = (activeOptions.length !== 0) ? activeOptions : this.selectedOption;
 		
+		let mobileDomStr = '';
+		const mobileDom = (dom) => {
+			mobileDomStr = mobileDomStr + dom;
+			return '';
+		};
+
 		this.optionHolder.setHTML(
 			model.getCurrentOptions
 				.map(
@@ -359,13 +366,19 @@ class App {
 							</select>
 							<div>${dropdown[index]}</div>
 						</div>
-						<div class="selectLabel" sid="">
+						<div class="selectLabel desktopOnly" sid="">
 							<img src="./img/warning-svgrepo-com.svg" />
 							${alphbetArray[index]}. ${item.option}
 						</div>
+						${mobileDom(`<li class="selectLabel mobileOnly" sid="">
+							<img src="./img/warning-svgrepo-com.svg" />
+							${alphbetArray[index]}. ${item.option}
+						</li>`)}
 					</li>`
 				).join("")
 		);
+		// added extra dom for mobile only
+		this.optionHolderForMobile.setHTML(mobileDomStr);
 
 		const selectionArr = [];
 		this.selector('#optionHolder .selectBoxHolder select').forEach( item => {
@@ -386,6 +399,7 @@ class App {
 					if(i !== 'null'){
 						duplicateArr[i].map( j => {
 							document.querySelectorAll('#optionHolder li')[j].addClass('conflict');
+							document.querySelectorAll('#optionHolderForMobile li')[j].addClass('conflict');
 						});
 					}
 				})

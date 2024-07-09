@@ -194,6 +194,18 @@ main {
 				width: 100%;
 			}
 		}
+
+		.timer {
+			@include media(allTouchDevice){
+				font-size: 14px;
+			}
+
+			svg {
+				@include media(allTouchDevice){
+					width: 20px;
+				}
+			}
+		}
 	}
 
 	&.reviewSection {
@@ -249,7 +261,31 @@ main {
                 white-space: normal;
             }
         }
+
+		&.matching{
+			.selectBoxHolder{
+				@include media(allTouchDevice){
+					width: 100%;
+				}
+			}
+		}
     }
+
+	#optionHolderForMobile{
+		@include media(allTouchDevice){
+			margin-top: 20px;
+		}
+
+		>li{
+			@include media(allTouchDevice){
+				width: 100%;
+				border-radius: 0;
+				border-left: 1px solid var(--black);
+				padding: 10px;
+				gap: 10px;
+			}
+		}
+	}
 
     .listing{
         >li{
