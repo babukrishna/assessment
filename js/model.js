@@ -103,6 +103,7 @@ class Model {
 			}
 		}
 
+		this.data.userData.questionScore = new Array(questionsId.length).fill(0);
 		this.data.userData.userQuestionSet = questionsId;
 	}
 	// get all categories list
@@ -152,5 +153,9 @@ class Model {
 	// get questions attempt by user
 	get getUserAttemptQuestions(){
 		return this.data.userData.attemptQuestions;
+	}
+
+	setScore(i, v){
+		this.data.userData.questionScore[i] = v;
 	}
 }

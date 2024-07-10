@@ -60,7 +60,7 @@ html {
 
 /* common css */
 .hide {
-	display: none;
+	display: none !important;
 }
 
 .textCenter {
@@ -68,6 +68,9 @@ html {
 }
 .textDanger{
 	color: var(--danger);
+}
+.textSuccess{
+	color: var(--success);
 }
 
 .desktopOnly {
@@ -165,13 +168,6 @@ header {
 	display: flex;
 	justify-content: space-between;
 
-	@include media(allTouchDevice) {
-		position: fixed;
-		top: 0;
-		left: 0;
-		order: 1;
-	}
-
 	.chapter {
 		display: flex;
 		font-size: 20px;
@@ -183,10 +179,6 @@ header {
 			font-weight: 600;
 			padding-right: 20px;
 			position: relative;
-
-			@include media(allTouchDevice) {
-				display: none;
-			}
 
 			&::after {
 				content: "";
@@ -207,13 +199,6 @@ header {
 			color: var(--chapter-subtitle-text-color);
 			font-weight: 600;
 			padding-left: 40px;
-
-			@include media(allTouchDevice) {
-				padding: 10px 15px;
-				font-size: 16px;
-				font-weight: 400;
-				height: 56px;
-			}
 		}
 	}
 
@@ -222,10 +207,6 @@ header {
 		padding: 10px;
 		font-size: 20px;
 		align-items: center;
-
-		@include media(allTouchDevice) {
-			display: none;
-		}
 
 		.userName {
 			color: var(--username-text-color);
@@ -255,10 +236,6 @@ main {
 	&.introSection {
 		overflow: hidden;
 
-		@include media(allTouchDevice) {
-			flex-direction: column;
-		}
-
 		.left {
 			padding: 45px;
 			width: 40%;
@@ -268,10 +245,6 @@ main {
 				font-weight: 500;
     			font-size: 5em;
 				margin: 0;
-			}
-
-			@include media(allTouchDevice) {
-				padding: 10px 15px;
 			}
 		}
 
@@ -423,6 +396,9 @@ main {
 			width: 70%;
 			padding: 45px;
 		}
+		.innerText{
+			font-size: 25px;
+		}
 	}
 
 	&.endSection {
@@ -504,6 +480,8 @@ main {
 
 			.selection{
 				font-size: 20px;
+				display: inline-block;
+				white-space: nowrap;
 			}
 		}
 
@@ -534,12 +512,12 @@ main {
 				border: 1px solid var(--black);
 				border-bottom: none;
 				padding: 10px;
-				display: flex;
-				gap: 20px;
 			}
 
 			select{
-				width: 50px;
+				width: 100%;
+				background-color: #fda715;
+				padding: 5px 10px;
 			}
 
 			.selectLabel{
@@ -585,8 +563,8 @@ main {
 		>li{
 			display: flex;
 			justify-content: space-between;
-			padding: 10px;
 			gap: 20px;
+			padding: 10px;
 			cursor: pointer;
 			border: 1px solid #ccc;
 			border-bottom: none;
@@ -616,20 +594,34 @@ main {
 		}
 
 		.content {
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			width: 100%;
-
 			svg {
 				vertical-align: middle;
 			}
 		}
 
+		.question{
+			margin-top: 10px;
+		}
+		
 		.contentHolder{
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			> div{
+				width: 900px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
 			&.open{
 				svg{
 					transform: rotate(90deg);
+				}
+
+				>div{
+					opacity: 0;
 				}
 			}
 		}

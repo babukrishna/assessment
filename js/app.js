@@ -17,7 +17,6 @@ class App {
 		this.description = this.selector(".quizHolder .description");
 		this.question = this.selector("#ques");
 		this.optionHolder = this.selector("#optionHolder");
-		this.optionHolderForMobile = this.selector("#optionHolderForMobile");
 		this.timer = this.selector('#timer');
 		// CTAs
 		this.previousBtn = this.selector("#prevCTA");
@@ -47,6 +46,7 @@ class App {
 		this.instructionSection = this.selector('.instructionSection');
 		// counter
 		this.counter = 0;
+		//this.tempCounter = -1;
 		this.currentScreen = model.getUserData('bookmark').split('&')[0];
 		if(model.getUserData('bookmark').split('&').length === 2){
 			this.counter = Number(model.getUserData('bookmark').split('&')[1])
@@ -116,34 +116,34 @@ class App {
 				}
 
 				this.question.setHTML(model.getCurrentQuestion);
-				this.nextBtn.disabled = this.counter > model.getUserQuestionsSetId.length - 2;
-				this.previousBtn.disabled = this.counter === 0;
-				this.reviewBtn.disabled = false;
 				this.timeManager();
+				this.nextBtn.disabled = false;
+				this.previousBtn.disabled = false;
+				this.reviewBtn.disabled = false;
 				break;
 			case 'REVIEW_SCREEN':
 				this.reviewSection.removeClass('hide');
 				this.reviewQuestion.setHTML(this.reviewQuestionList());
+				this.nextBtn.disabled = false;
+				this.previousBtn.disabled = false;
 				break;
 			case 'END_SCREEN':
 				this.endingSection.removeClass('hide');
 				this.endQuestionList.setHTML(this.reviewQuestionList());
 
-				const scorePercentage = (model.getUserData('score') * 100) / model.getUserQuestionsSetId.length;
+				this.pass.removeClass('hide');
+				model.setUserData('status', 'completed');
+				
+				const scoreSum = model.dataAll.userData.questionScore.reduce((sum, x) => sum + x);
+				const scorePercentage = scoreSum * 100 / Number(model.getUserQuestionsSetId.length);
+				model.setUserData('score', scorePercentage);
 				this.score.setHTML(scorePercentage);
 
-				if(scorePercentage >= model.dataAll.passingScorePercentage){
-					this.pass.removeClass('hide');
-					this.fail.addClass('hide');
-					model.setUserData('status', 'completed')
-				}else{
-					this.pass.addClass('hide');
-					this.fail.removeClass('hide');
-				}
 				break;
 			case 'INSTRUCTION_SCREEN':
 				this.instructionSection.removeClass('hide');
 				this.nextBtn.disabled = false;
+				this.previousBtn.disabled = false;
 				break;
 			default:
 				this.introSection.removeClass('hide');
@@ -158,6 +158,7 @@ class App {
 	reviewQuestionClickHandler(e) {
 		if(this.currentScreen === 'END_SCREEN'){
 			const target = e.querySelector('.optionHolder');
+			const question = e.querySelector('.question');
 			const contentHolder = e.querySelector('.contentHolder');
 
 			if(contentHolder.class('open')){
@@ -168,8 +169,10 @@ class App {
 
 			if(target.class('hide')){
 				target.removeClass('hide')
+				question.removeClass('hide')
 			}else{
 				target.addClass('hide')
+				question.addClass('hide')
 			}
 		} else {
 			this.counter = +e.getAttribute("data-index");
@@ -179,7 +182,24 @@ class App {
 	}
 
 	previousClickHandler() {
-		this.counter = --this.counter;
+		if(this.currentScreen === 'INSTRUCTION_SCREEN'){
+			this.currentScreen = 'INTRO_SCREEN';
+			this.pageLoader();
+			return false;
+		}
+		
+		if((this.counter === 0) && this.currentScreen === 'QUIZ_SCREEN'){
+			this.currentScreen = 'INSTRUCTION_SCREEN';
+			this.pageLoader();
+			return false;
+		}
+
+		if(this.currentScreen === 'REVIEW_SCREEN'){
+			this.counter = Number(model.getUserData('previousScreen'))
+		} else {
+			this.counter = --this.counter;
+		}
+		
 		this.currentScreen = 'QUIZ_SCREEN';
 		this.pageLoader();
 	}
@@ -198,8 +218,21 @@ class App {
 		}
 
 		if(this.currentScreen === 'QUIZ_SCREEN'){
-			this.counter = ++this.counter;
+			if(this.counter > model.getUserQuestionsSetId.length - 2){
+				model.setUserData('previousScreen', this.counter);
+				this.currentScreen = 'REVIEW_SCREEN';
+			}else{
+				this.counter = ++this.counter;
+			}
+			
 			this.pageLoader();
+			return false;
+		}
+
+		if(this.currentScreen === 'REVIEW_SCREEN'){
+			this.currentScreen = 'END_SCREEN';
+			this.pageLoader();
+			return false;
 		}
 	}
 
@@ -209,6 +242,7 @@ class App {
 	}
 
 	reviewFormation() {
+		model.setUserData('previousScreen', this.counter);
 		this.currentScreen = 'REVIEW_SCREEN';
 		this.pageLoader();
 	}
@@ -221,12 +255,13 @@ class App {
 						<div class="content">
 							<div class="contentHolder">
 								<svg width="25px" height="25px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="icomoon-ignore"></g><path d="M2.639 15.992c0 7.366 5.97 13.337 13.337 13.337s13.337-5.97 13.337-13.337-5.97-13.337-13.337-13.337-13.337 5.97-13.337 13.337zM28.245 15.992c0 6.765-5.504 12.27-12.27 12.27s-12.27-5.505-12.27-12.27 5.505-12.27 12.27-12.27c6.765 0 12.27 5.505 12.27 12.27z" fill="#000000"></path><path d="M19.159 16.754l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z" fill="#000000"></path></svg>
-								${index+1}<div class="desktopOnlyInline">. ${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}</div>
+								${index+1}. <div>${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}</div>
 							</div>
+							<div class="question hide">${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}</div>
 							${this.getQuestionOptionsFormation(item)}
 						</div>
 						<div class="${this.getAttemptQuestion(item) ? 'answered' : 'unanswered'}">
-							${this.getListLabel(this.getAttemptQuestion(item))}
+							${this.getListLabel(this.getAttemptQuestion(item), index, Number(model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].weightage))}
 						</div>
 					</li>`
 			)
@@ -284,7 +319,7 @@ class App {
 						<span class="bullet">${alphbetArray[index]}</span>
 						<p class="option">
 							${item.option}
-							${(type === 'matching') ? `( <i class="selection">${dropdown[item.isCorrect]}</i> )` : '' }</p>
+							${(type === 'matching') ? `<i class="selection">(${dropdown[item.isCorrect]})</i>` : '' }</p>
 					</li>`
 				)
 				.join("")
@@ -324,12 +359,14 @@ class App {
 		}
 		return isMatched;
 	}
-
-	getListLabel(value){
+	
+	getListLabel(value, index, weightage){
 		if(value){
 			if(this.currentScreen === 'END_SCREEN'){
-				model.setUserData( 'score', model.getUserData('score') + 1);
+				const score = (weightage > 0) ? weightage : 1;
+				model.setScore(index, score);
 			}
+			
 			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Answered': 'Correct';
 		} else {
 			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Unanswered': 'Incorrect';
@@ -348,12 +385,6 @@ class App {
 		const tempCid = model.getUserAttemptQuestions[model.getCurrentCategoryId];
 		const activeOptions = (tempCid && tempCid[model.getCurrentQuestionId]) ? tempCid[model.getCurrentQuestionId] : [];
 		this.selectedOption = (activeOptions.length !== 0) ? activeOptions : this.selectedOption;
-		
-		let mobileDomStr = '';
-		const mobileDom = (dom) => {
-			mobileDomStr = mobileDomStr + dom;
-			return '';
-		};
 
 		this.optionHolder.setHTML(
 			model.getCurrentOptions
@@ -361,24 +392,17 @@ class App {
 					(item, index) => `<li>
 						<div class="selectBoxHolder">
 							<select uid="${item.optionId}">
-								${activeOptions.length === 0 && `<option></option>`}
-								${dropdown.map((item, i) => `<option ${(+activeOptions[index] === numberArray[i]) && 'selected'} value="${numberArray[i]}">${alphbetArray[i]}</option>`).join("")}
+								${activeOptions.length === 0 && `<option>Select</option>`}
+								${dropdown.map((item, i) => `<option ${(+activeOptions[index] === numberArray[i]) && 'selected'} value="${numberArray[i]}">${dropdown[i]}</option>`).join("")}
 							</select>
-							<div>${dropdown[index]}</div>
 						</div>
-						<div class="selectLabel desktopOnly" sid="">
+						<div class="selectLabel" sid="">
 							<img src="./img/warning-svgrepo-com.svg" />
 							${alphbetArray[index]}. ${item.option}
 						</div>
-						${mobileDom(`<li class="selectLabel mobileOnly" sid="">
-							<img src="./img/warning-svgrepo-com.svg" />
-							${alphbetArray[index]}. ${item.option}
-						</li>`)}
 					</li>`
 				).join("")
 		);
-		// added extra dom for mobile only
-		this.optionHolderForMobile.setHTML(mobileDomStr);
 
 		const selectionArr = [];
 		this.selector('#optionHolder .selectBoxHolder select').forEach( item => {
@@ -399,7 +423,6 @@ class App {
 					if(i !== 'null'){
 						duplicateArr[i].map( j => {
 							document.querySelectorAll('#optionHolder li')[j].addClass('conflict');
-							document.querySelectorAll('#optionHolderForMobile li')[j].addClass('conflict');
 						});
 					}
 				})

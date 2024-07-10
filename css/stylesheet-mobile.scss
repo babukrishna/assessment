@@ -46,6 +46,11 @@
 	--footer-background-color: var(--white);
 } */
 
+body{
+	@include media(allTouchDevice){
+		height: auto;
+	}
+}
 
 .desktopOnly {
 	display: block;
@@ -83,11 +88,15 @@ button {
 }
 
 .mainContainer {
+	@include media(allTouchDevice){
+		overflow-y: auto;
+	}
+
 	.section {
 		@include media(allTouchDevice){
 			display: flex;
-			flex-flow: row;
-			height: 100vh;
+			flex-flow: column;
+			min-height: 100vh;
 			background-color: var(--main-background-color);
             padding: 0;
 		}
@@ -100,6 +109,7 @@ header {
 		top: 0;
 		left: 0;
 		order: 1;
+		z-index: 1;
 	}
 
 	.chapter {
@@ -130,17 +140,23 @@ header {
 	@include media(allTouchDevice){
 		order: 3;
 		margin-top: 110px;
+		height: 100%;
 	}
 }
 
 main {
     @include media(allTouchDevice) {
-        height: auto;
+        height: 100%;
+		flex-flow: column;
+		padding-bottom: 20px;
     }
 
 	&.introSection {
 		@include media(allTouchDevice) {
 			flex-direction: column;
+			overflow-y: auto;
+			height: 100%;
+			padding-bottom: 0;
 		}
 
 		.left {
@@ -171,6 +187,7 @@ main {
 	&.instructionSection{
         @include media(allTouchDevice){
             height: 100%;
+			overflow-y: auto;
         }
 
         .holder{
@@ -182,6 +199,11 @@ main {
 	}
 
 	&.questionSection {
+		@include media(allTouchDevice){
+			overflow-y: auto;
+			height: 100%;
+		}
+
 		.left {
 			@include media(allTouchDevice){
 				display: none;
@@ -219,6 +241,7 @@ main {
                 padding: 15px;
                 flex-flow: column;
                 font-size: 25px;
+				gap: 20px;
             }
         }
 
@@ -256,16 +279,31 @@ main {
 	}
 
     .optionHolder{
-        .option{
-            @include media(allTouchDevice){
-                white-space: normal;
-            }
-        }
-
 		&.matching{
+			@include media(allTouchDevice){
+				gap: 20px;
+				border-bottom: 0;
+			}
+
+			>li{
+				@include media(allTouchDevice){
+					flex-flow: column;
+				}
+			}
 			.selectBoxHolder{
 				@include media(allTouchDevice){
 					width: 100%;
+					order: 2;
+					border-top: 0;
+					border-bottom: 1px solid var(--black);
+				}
+			}
+			.selectLabel{
+				@include media(allTouchDevice){
+					width: 100%;
+					order: 1;
+					border-left: 1px solid var(--black);
+					padding: 10px 10px 10px 5px;
 				}
 			}
 		}
@@ -291,14 +329,29 @@ main {
         >li{
             @include media(allTouchDevice){
                 position: relative;
+				flex-flow: column;
             }
         }
+
+		.contentHolder{
+			> div{
+				@include media(allTouchDevice){
+					width: 140px;
+				}
+			}
+		}
 
         .unanswered, 
         .answered{
             position: absolute;
             right: 0;
         }
+
+		.header{
+			@include media(allTouchDevice){
+				flex-flow: row;
+			}
+		}
     }
 }
 
