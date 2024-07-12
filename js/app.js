@@ -401,7 +401,7 @@ class App {
 					(item, index) => `<li>
 						<div class="selectBoxHolder">
 							<select uid="${item.optionId}">
-								${(activeOptions[index] === null) && `<option>Select</option>`}
+								${((activeOptions[index] === null) || (activeOptions.length === 0)) && `<option>Select</option>`}
 								${dropdown.map((item, i) => 
 									`<option ${((+activeOptions[index] === numberArray[i]) && (activeOptions[index] !== null)) && 'selected'} value="${numberArray[i]}">${dropdown[i]}</option>`).join("")}
 							</select>
