@@ -600,6 +600,7 @@ main {
 		}
 
 		.question{
+			display: none;
 			margin-top: 10px;
 		}
 		
@@ -618,10 +619,6 @@ main {
 			&.open{
 				svg{
 					transform: rotate(90deg);
-				}
-
-				>div{
-					opacity: 0;
 				}
 			}
 		}

@@ -37,7 +37,7 @@
 		"photo": "./img/profilePic.jpg",
         // user photo url
 
-		"userQuestionSet": ["c0q8","c0q7","c0q17","c0q10","c0q1","c0q18","c0q0","c0q4","c0q9","c0q6","c0q2","c0q15","c0q14","c0q11","c0q3","c0q19","c0q5","c0q13","c0q12","c0q16"],
+		"userQuestionSet": ["c0q20","c0q11","c0q17","c0q7","c0q18","c0q2","c0q1","c0q19","c0q16","c0q15","c0q9","c0q5","c0q3","c0q12","c0q8","c0q14","c0q10","c0q13","c0q0","c0q4"],
         // question set generated for the user for first time.
 
 		"attemptQuestions": {"c0":{"q1":["2"],"q3":["3"],"q2":["2","3"]},"c1":{"q3":["2","3"],"q0":["2"]},"c2":{"q0":["2","1"]}}

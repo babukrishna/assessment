@@ -124,11 +124,11 @@ class Model {
 	}
 	// get current question id 'q0' it is coming from 'getCurrentQuestionSetId' 'c2q0'
 	get getCurrentQuestionId(){
-		return utils.getCategoryAndQuestionId(this.currentQuestionId)[1];
+		return utils.getQuestionId(this.currentQuestionId);
 	}
 	// get current category id 'c2' it is coming from 'getCurrentQuestionSetId' 'c2q0'
 	get getCurrentCategoryId(){
-		return utils.getCategoryAndQuestionId(this.currentQuestionId)[0];
+		return utils.getCategoryId(this.currentQuestionId);
 	}
 	// get current question as per current category and question id
 	get getCurrentQuestion(){
