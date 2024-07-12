@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<lom xmlns="http://ltsc.ieee.org/xsd/LOM"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:pkgprop="http://www.scorm.com/xsd/ScormEnginePackageProperties"
+     xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM lomLoose.xsd 
+                         http://www.scorm.com/xsd/ScormEnginePackageProperties ScormEnginePackageProperties.xsd">
+    <general>
+        <identifier>
+            <catalog>URI</catalog>
+            <entry>com.company.product.PRIMARYOBJASSE1</entry>
+        </identifier>
+        <title>
+            <string language="en-US">Assessment: Engineering And Contractor</string>
+        </title>
+		
+        <language>en</language>
+
+        <description>
+            <string language="en-US">Assessment: Engineering And Contractor</string>
+        </description>
+
+    </general>
+
+    <lifeCycle>
+        <version>
+            <string language="en-US">1.0</string>
+        </version>
+
+        <contribute>
+            <role>
+                <source>LOMv1.0</source>
+                <value>author</value>
+            </role>
+            <entity>
+                <![CDATA[]]>
+            </entity>
+            <date>
+                <dateTime>2016-11-23</dateTime>
+                <!-- Replace with the current time stamp when exporting from Captivate -->
+                <description>
+                    <string language="en-US">Assessment: Engineering And Contractor</string>
+                </description>
+            </date>
+        </contribute>
+
+        <contribute>
+            <role>
+                <source>LOMv1.0</source>
+                <value>publisher</value>
+            </role>
+            <entity>
+                <![CDATA[]]>
+            </entity>
+        </contribute>
+
+        <contribute>
+            <role>
+                <source>LOMv1.0</source>
+                <value>technical implementer</value>
+            </role>
+            <entity>
+                <![CDATA[]]>
+            </entity>
+        </contribute>
+        
+    </lifeCycle>
+
+    <technical>
+
+        <format>text/html</format>
+        <format>application/x-javascript</format>
+        <format>application/x-shockwave-flash</format>
+        <format>text/css</format>
+
+        <size>516096</size>
+        <duration>
+            <duration>PT10M</duration>
+            <description>
+                <string language="en-us">3 hrs from start to finish.</string>
+            </description>
+        </duration>
+        <pkgprop:ScormEnginePackageProperties xmlns="http://www.scorm.com/xsd/ScormEnginePackageProperties">
+            <appearence>
+                <displayStage>
+                    <desired>
+                        <!-- Replace with target width and height of movie. (From Project Information -> Resolution -->
+                        <width>750</width>
+                        <height>550</height>
+                        <fullscreen>no</fullscreen>
+                    </desired>
+                    <required>
+                        <width>0</width>
+                        <height>0</height>
+                        <fullscreen>no</fullscreen>
+                    </required>
+                </displayStage>
+            </appearence>
+            <behavior>
+                <alwaysFlowToFirstSco>yes</alwaysFlowToFirstSco>
+                <rollupEmptySetToUnknown>yes</rollupEmptySetToUnknown>
+            </behavior>
+        </pkgprop:ScormEnginePackageProperties>
+    </technical>
+
+    <educational>
+        <!-- Use the value from Manifest-> Duration here. This is the time it will take for a typical learner to progress through the course, fully experiencing it.-->
+        <typicalLearningTime>
+            <duration>PT10M</duration>
+            <description>
+                <string language="en-us">3 hrs</string>
+            </description>
+        </typicalLearningTime>
+
+        <!-- Manifest->Course.Description. If that doesn't exist, replace with Project Information-> Description  (same as description above)-->
+        <description>
+            <string>Assessment: Engineering And Contractor</string>
+        </description>
+
+        <!-- If you know the locale, enter it here, if not, remove this node (same as language above)-->
+        <language>en-us</language>
+
+    </educational>
+
+    <rights>
+
+        <copyrightAndOtherRestrictions>
+            <source>LOMv1.0</source>
+            <value>yes</value>
+        </copyrightAndOtherRestrictions>
+
+        <!-- Enter Project Information->Copyright here. If blank, omit the description. -->
+        <description>
+            <string>Assessment: Engineering And Contractor</string>
+        </description>
+
+    </rights>
+</lom>

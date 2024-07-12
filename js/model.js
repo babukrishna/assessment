@@ -5,6 +5,22 @@ class Model {
 	//Initializes model data
 	async init() {
 		this.data = await this.loadMetadata();
+		
+		if (scoData.trackingMode != null) {
+			this.data.userData = {
+				...this.data.userData,
+				name: scoData.getValue("name"),
+			};
+
+			if (scoData.getValue("lessonStatus") != "not attempted" && scoData.getValue("lessonStatus") != "unknown") {
+				this.data.userData = JSON.parse(scoData.getValue("suspendData"));
+
+				this.data.userData = {
+					...this.data.userData,
+					name: scoData.getValue("name"),
+				};
+			}
+		}
 		this.createCategoriesList();
 		this.createQuestionsId();
 	}
@@ -18,7 +34,22 @@ class Model {
 	// Get all data
 	get dataAll() {
 		return this.data;
-	}	
+	}
+
+	//Returns user data
+	getUserData(k) {
+		return (k) ? this.data.userData[k] : this.data.userData;
+	}
+
+	//Sets user data
+	setUserData(k, v) {
+		this.data.userData[k] = v;
+	}
+
+	//Returns user data
+	setUserDataAll(v) {
+		this.data.userData = v;
+	}
 
 	createCategoriesList(){
 		this.categoryListArray = Object.keys(this.data.set);
@@ -72,6 +103,7 @@ class Model {
 			}
 		}
 
+		this.data.userData.questionScore = new Array(questionsId.length).fill(0);
 		this.data.userData.userQuestionSet = questionsId;
 	}
 	// get all categories list
@@ -122,20 +154,8 @@ class Model {
 	get getUserAttemptQuestions(){
 		return this.data.userData.attemptQuestions;
 	}
-	//set user spend time
-	set setUserRemainTime(time){
-		this.data.userData.remainTime = time;
-	}
-	//get user spend time
-	get getUserRemainTime(){
-		return this.data.userData.remainTime;
-	}
-	//set user score
-	set setUserScore(score){
-		this.data.userData.score = score;
-	}
-	//get user score
-	get getUserScore(){
-		return this.data.userData.score;
+
+	setScore(i, v){
+		this.data.userData.questionScore[i] = v;
 	}
 }

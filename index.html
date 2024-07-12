@@ -2,12 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="preload" as="script" href="js/utils.js" />
+    <link rel="preload" as="script" href="js/scorm/apiwrapper.js" />
+    <link rel="preload" as="script" href="js/scorm/scoapiwrapper.js" />
+    <link rel="preload" as="script" href="js/scorm/scodata.js" />
     <link rel="preload" as="script" href="js/model.js" />
     <link rel="preload" as="script" href="js/app.js" />
     <link rel="preload" as="script" href="js/index.js" />
-    <title>Assessment: Solar Build Construction Management</title>
+    <title>Assessment: Engineering And Contractor</title>
     <link rel="stylesheet" href="css/stylesheet.css" />
   </head>
   <body>
@@ -121,16 +124,16 @@
           <!-- review section -->
           <main class="container reviewSection hide">
             <div class="top">
-              <section class="content">
+              <section class="content textCenter">
                 <strong>Ready to submit the assessment?</strong> Click on the
                 <strong>SUBMIT TEST</strong> button
               </section>
               <button id="submitTest">Submit Test</button>
             </div>
-            <br/><br/>
+            <br/>
             <div id="reviewHolder">
-              <p class="textCenter">
-                <strong>Wish to review your answers?</strong> Click on any question to navigation to it.
+              <p class="textCenter innerText">
+                <strong>Wish to review your questions?</strong> Click on any question to navigate to it.
               </p>
               <br/>
               <ul class="reviewQuestionList listing"></ul>
@@ -140,8 +143,8 @@
           <!-- end section -->
           <main class="container endSection hide">
             <div class="holder">
-              <p class="textCenter"><img src="./img/weldone.png" style="width:150px;"/></p>
-              <h2 class="textCenter textDanger">Well Done! You have scored <span id="score">60</span>%</h2>
+              <p class="textCenter welldone"><img src="./img/weldone.png" style="width:150px;"/></p>
+              <h2 class="textCenter textSuccess"><span class="pass hide">Well Done! You have scored</span> <span id="score">0</span>%</h2>
               <p class="textCenter">
                 You can chlose this window and take another pre-assessment or go to your training eLearning. <br/> To see how you did, click on nay question to expand it and see the correct answers
               </p>
@@ -181,6 +184,9 @@
     </div>
 
     <script src="js/utils.js"></script>
+    <script src="js/scorm/apiwrapper.js"></script>
+    <script src="js/scorm/scoapiwrapper.js"></script>
+    <script src="js/scorm/scodata.js"></script>
     <script src="js/model.js"></script>
     <script src="js/app.js"></script>
     <script src="js/index.js"></script>

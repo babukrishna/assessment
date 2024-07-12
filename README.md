@@ -42,6 +42,11 @@
 
 		"attemptQuestions": {"c0":{"q1":["2"],"q3":["3"],"q2":["2","3"]},"c1":{"q3":["2","3"],"q0":["2"]},"c2":{"q0":["2","1"]}}
         // attempt questions from generated question set
+
+		"bookmark": "QUIZ_SCREEN&2"
+		// QUIZ_SCREEN&2 - quiz bookmars would be with index id
+		// REVIEW_SCREEN
+		// INTRO_SCREEN
 	},
 	"otherPages": {
 		"introductionPage": {
