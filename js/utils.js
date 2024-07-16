@@ -22,16 +22,42 @@ class Utils {
 		return array;
 	}
 
-	getCategoryAndQuestionId(str){
+	getQuestionId(str){
 		const tempArr = String(str).split('q');
 		tempArr[1] = 'q'+tempArr[1];
-		return tempArr;
+		return tempArr[1];
+	}
+
+	getCategoryId(str){
+		const tempArr = String(str).split('q');
+		tempArr[1] = 'q'+tempArr[1];
+		return tempArr[0];
 	}
 
 	convertMinutesToHours(minutes) {
 		let hours = Math.floor(minutes / 60);
 		let remainingMinutes = minutes % 60;
 		return `${hours} hour and ${remainingMinutes} minute`;
+	}
+
+	findDuplicateIndexes(arr) {
+		let duplicates = {};
+		arr.forEach((item, index) => {
+			if (duplicates[item]) {
+				duplicates[item].push(index);
+			} else {
+				duplicates[item] = [index];
+			}
+		});
+	
+		let result = {};
+		for (let key in duplicates) {
+			if (duplicates[key].length > 1) {
+				result[key] = duplicates[key];
+			}
+		}
+	
+		return result;
 	}
 
 	deviceDetector() {

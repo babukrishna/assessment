@@ -333,10 +333,24 @@ main {
             }
         }
 
+		.question{
+			@include media(allTouchDevice){
+				display: block;
+			}
+		}
+
 		.contentHolder{
 			> div{
 				@include media(allTouchDevice){
 					width: 140px;
+				}
+			}
+
+			&.open{
+				>div{
+					@include media(allTouchDevice){
+						opacity: 0;
+					}
 				}
 			}
 		}

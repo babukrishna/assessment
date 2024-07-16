@@ -1,0 +1,497 @@
+{
+	"time": 90,
+	"passingScorePercentage": 80,
+	"numberOfQuestions": 10,
+	"byWeightage": false,
+	"questionSetFromCategories": [
+		{
+			"categoryId": "c1",
+			"numberOfQuestions": 20,
+			"random": true
+		}
+	],
+	"randomOption": false,
+	"chapterTitle": "Engineering And Contractor",
+	"chapterSubtitle": "Module 1: Engineering: What is the purpose of conducting a site evaluation?",
+	"userData": {
+		"name": "Jone Doe",
+		"userQuestionSet": [],
+		"questionScore": [],
+		"attemptQuestions": {},
+		"remainTime": 0,
+		"score": 0,
+		"status": "incomplete",
+		"bookmark": "REVIEW_SCREEN",
+		"previousScreen": "null"
+	},
+	"categories": {
+		"c0": {
+			"title": "",
+			"description": ""
+		}
+	},
+	"set": {
+		"c2": {
+			"q0": {
+				"type": "mcq",
+				"question": "What does EPC stand for?",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Education Production and Consultation"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Environmental Protection Corporation"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Electrical Power Consumption"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "Engineering Procurement and Construction"
+					}
+				]
+			},
+			"q1": {
+				"type": "mcq",
+				"question": "What are some of the Engineer’s responsibilities?",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Following the Canadian Electrical Code"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Following the Ontario Building Code"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Checking soil conditions and environmental issues"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q2": {
+				"type": "mcq",
+				"question": "Part of the Procurement process is...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Installing an operational solar powered system"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Creating Request for Quotes (RFQ’S)"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 1,
+						"option": "Inspecting work done"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Applying for funding"
+					}
+				]
+			},
+			"q3": {
+				"type": "mcq",
+				"question": "Completing a site evaluation is critical for...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Funding the project"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Commissioning the project"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 1,
+						"option": "Collecting information to start the project"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "A job for the ESA inspector"
+					}
+				]
+			},
+			"q4": {
+				"type": "mcq",
+				"question": "What does CIA stand for?",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "Connection Impact Assessment"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Collection of Independent Analysis"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Central Impact Analysis"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "None of the above"
+					}
+				]
+			},
+			"q5": {
+				"type": "tnf",
+				"question": "The notice to proceed comes from the Electrical Safety Authority",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "False"
+					}
+				]
+			},
+			"q6": {
+				"type": "mcq",
+				"question": "The DC portion of the install involves...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Solar Racking"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Modules"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Disconnects and combiners"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q7": {
+				"type": "tnf",
+				"question": "The AC portion of the construction must be completed by a certified electrician",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "False"
+					}
+				]
+			},
+			"q8": {
+				"type": "mcq",
+				"question": "A bi-directional meter purpose is to...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Measure both the AC and DC power"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Will keep track of both off peak and peak power consumption"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 1,
+						"option": "Keeps track of power going out to the grid and power coming in"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Monitors solar power and grid power"
+					}
+				]
+			},
+			"q9": {
+				"type": "mcq",
+				"question": "Application for a Net Metering system is made to?",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Municipal offices"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Electrical Safety Authority"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 1,
+						"option": "Local Distribution Company"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Ministry of Labour"
+					}
+				]
+			},
+			"q10": {
+				"type": "tnf",
+				"question": "Gannt Charts are useful for organizing time and tasks",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "False"
+					}
+				]
+			},
+			"q11": {
+				"type": "tnf",
+				"question": "Electrical permits must be pulled by engineers",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "False"
+					}
+				]
+			},
+			"q12": {
+				"type": "tnf",
+				"question": "The Commercial Operation Date (COD) is the date which the system becomes fully operational with the battery bank",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "False"
+					}
+				]
+			},
+			"q13": {
+				"type": "tnf",
+				"question": "QAQC stands for Quality Assurance Quality Control",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "False"
+					}
+				]
+			},
+			"q14": {
+				"type": "mcq",
+				"question": "When designing a net metering system...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "You must pick the highest power consumption month"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "You must take the average consumption per day for the year"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "You must take the average consumption for the past 5 years"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "It is not important to get the power consumption"
+					}
+				]
+			},
+			"q15": {
+				"type": "tnf",
+				"question": "Equity is the ownership of any asset after any liabilities associated with the asset are cleared",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "False"
+					}
+				]
+			},
+			"q16": {
+				"type": "tnf",
+				"question": "Internal Rate of Return measures how effective your investments into your business are at generating income",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "False"
+					}
+				]
+			},
+			"q17": {
+				"type": "mcq",
+				"question": "Payback period refers to...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "Is the period of time it takes to recover investment of a project"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Is the time is takes to generate enough power to offset consumption"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Is the time it takes to pay off any debts associated with project"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q18": {
+				"type": "mcq",
+				"question": "The purpose of project meetings are to...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Identify action items"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Meet deadlines"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Should be captured in meeting minutes"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q19": {
+				"type": "mcq",
+				"question": "In performing a site evaluation, it is important to...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "Take photos of electrical room"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Engage local leaders"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Meet with LDC representative"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Pull an electrical permit"
+					}
+				]
+			}
+		}
+	}
+}

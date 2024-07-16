@@ -1,0 +1,517 @@
+{
+	"time": 90,
+	"passingScorePercentage": 80,
+	"numberOfQuestions": 10,
+	"byWeightage": false,
+	"questionSetFromCategories": [
+		{
+			"categoryId": "c1",
+			"numberOfQuestions": 20,
+			"random": true
+		}
+	],
+	"randomOption": false,
+	"chapterTitle": "Engineering And Contractor",
+	"chapterSubtitle": "Module 1: Engineering: What is the purpose of conducting a site evaluation?",
+	"userData": {
+		"name": "Jone Doe",
+		"userQuestionSet": [],
+		"questionScore": [],
+		"attemptQuestions": {},
+		"remainTime": 0,
+		"score": 0,
+		"status": "incomplete",
+		"bookmark": "REVIEW_SCREEN",
+		"previousScreen": "null"
+	},
+	"categories": {
+		"c0": {
+			"title": "",
+			"description": ""
+		}
+	},
+	"set": {
+		"c4": {
+			"q0": {
+				"type": "mcq",
+				"question": "What does the “A” in QAQC stand for?",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Acceptance"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Accuracy"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 1,
+						"option": "Assurance"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Adaptable"
+					}
+				]
+			},
+			"q1": {
+				"type": "mcq",
+				"question": "The purpose of QAQC is to...",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Reduce costs of Engineering"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Reduce costs of Installers"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Reduce costs of Electricians"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "None of the above"
+					}
+				]
+			},
+			"q2": {
+				"type": "tnf",
+				"question": "The Community Energy Champion is qualified to perform a portion of the QAQC",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "False"
+					}
+				]
+			},
+			"q3": {
+				"type": "mcq",
+				"question": "This part of the QAQC testing",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "Test Voltage of Strings of Panels"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Check permits"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Schedule inspector"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q4": {
+				"type": "tnf",
+				"question": "QAQC Recommendations are issued from Inspectors",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "False"
+					}
+				]
+			},
+			"q5": {
+				"type": "mcq",
+				"question": "A good way to troubleshoot a solar panel is to",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Contact the ESA"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "Test the voltage with a multi-meter"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Take pictures and call the manufacturer"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "None of the above"
+					}
+				]
+			},
+			"q6": {
+				"type": "mcq",
+				"question": "Doing a visual inspection of a solar array involves",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "Check that wires are secure"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Checking the clamps on the inverter"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Checking the hydro meter"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Checking the main service panel is turned on"
+					}
+				]
+			},
+			"q7": {
+				"type": "mcq",
+				"question": "Troubleshooting an inverter involves",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Making sure the hot and cold, water lines are not backwards"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "The battery cables are not reversed"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 1,
+						"option": "Checking for any error codes on the display"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "None of the above"
+					}
+				]
+			},
+			"q8": {
+				"type": "mcq",
+				"question": " Loose connections on an inverter can cause",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "A fire"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "The system to not work"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Danger to people"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q9": {
+				"type": "mcq",
+				"question": "If the system is not working the combiner box should be checked for",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "Faulty breaker or fuse"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "A dead battery"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Should never be opened for safety reasons"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Only be opened by a qualified electrician"
+					}
+				]
+			},
+			"q10": {
+				"type": "tnf",
+				"question": "The combiner box is where strings of solar panel home runs are connected",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "False"
+					}
+				]
+			},
+			"q11": {
+				"type": "mcq",
+				"question": "A warranty can be delivered by",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Installer"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Manufacturer"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Electrician"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q12": {
+				"type": "tnf",
+				"question": "Warranties are the same length of time as the expected lifespan of equipment",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "False"
+					}
+				]
+			},
+			"q13": {
+				"type": "mcq",
+				"question": "Solar Monitoring is.",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Someone to guard the array from thieves stealing the panels"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "The Electrical Safety Authority ensuring equipment is CSA approved"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 1,
+						"option": "A system that tracks the production of your solar array"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "None of the above"
+					}
+				]
+			},
+			"q14": {
+				"type": "mcq",
+				"question": "Why is it Important to Monitor Solar Output?",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Maintains the warranty of equipment"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Is part of the Canadian Electrical Code"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Is critical to the operation of the system"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "Provides immediate notification if your solar system requires maintenance"
+					}
+				]
+			},
+			"q15": {
+				"type": "tnf",
+				"question": "String Inverter monitoring shows every individual panel performance",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 1,
+						"option": "False"
+					}
+				]
+			},
+			"q16": {
+				"type": "mcq",
+				"question": "Micro Inverter System Monitoring",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "Can monitor every panels production"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Does not do it in real time"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Needs a string inverter"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 0,
+						"option": "Is not legal in Canada"
+					}
+				]
+			},
+			"q17": {
+				"type": "tnf",
+				"question": "Each micro inverter needs to be mapped out where it is situated in the array",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 1,
+						"option": "True"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "False"
+					}
+				]
+			},
+			"q18": {
+				"type": "mcq",
+				"question": "Power Optimizers",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Can only operate with a separate inverter"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Have system monitoring"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "Are essentially a DC to DC booster"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "All of the above"
+					}
+				]
+			},
+			"q19": {
+				"type": "mcq",
+				"question": "System Monitoring needs to be installed by a qualified",
+				"weightage": 0,
+				"options": [
+					{
+						"optionId": 0,
+						"isCorrect": 0,
+						"option": "Engineer"
+					},
+					{
+						"optionId": 1,
+						"isCorrect": 0,
+						"option": "Electrician"
+					},
+					{
+						"optionId": 2,
+						"isCorrect": 0,
+						"option": "ESA inspector"
+					},
+					{
+						"optionId": 3,
+						"isCorrect": 1,
+						"option": "Anyone"
+					}
+				]
+			}
+		}
+	}
+}

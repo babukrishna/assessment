@@ -124,7 +124,7 @@ class App {
 			case 'REVIEW_SCREEN':
 				this.reviewSection.removeClass('hide');
 				this.reviewQuestion.setHTML(this.reviewQuestionList());
-				this.nextBtn.disabled = false;
+				this.nextBtn.disabled = true;
 				this.previousBtn.disabled = false;
 				break;
 			case 'END_SCREEN':
@@ -160,6 +160,12 @@ class App {
 			const target = e.querySelector('.optionHolder');
 			const question = e.querySelector('.question');
 			const contentHolder = e.querySelector('.contentHolder');
+
+			// reset all selected LIs
+			this.selector('.endQuestionList li').forEach(function(item){
+				item.querySelector('.contentHolder')?.removeClass('open')
+				item.querySelector('.optionHolder')?.addClass('hide')
+			})
 
 			if(contentHolder.class('open')){
 				contentHolder.removeClass('open')
@@ -248,22 +254,27 @@ class App {
 	}
 	
 	reviewQuestionList() {
+		const svg = `<svg width="25px" height="25px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="icomoon-ignore"></g><path d="M2.639 15.992c0 7.366 5.97 13.337 13.337 13.337s13.337-5.97 13.337-13.337-5.97-13.337-13.337-13.337-13.337 5.97-13.337 13.337zM28.245 15.992c0 6.765-5.504 12.27-12.27 12.27s-12.27-5.505-12.27-12.27 5.505-12.27 12.27-12.27c6.765 0 12.27 5.505 12.27 12.27z" fill="#000000"></path><path d="M19.159 16.754l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z" fill="#000000"></path></svg>`
+
 		let str = model.getUserQuestionsSetId
 			.map(
-				(item, index) =>
-					`<li data-index="${index}">
+				(item, index) =>{
+					const data = model.dataAll.set[utils.getCategoryId(item)][utils.getQuestionId(item)];
+					const isQuestionAttempt = this.getAttemptQuestion(item);
+
+					return (`<li data-index="${index}">
 						<div class="content">
 							<div class="contentHolder">
-								<svg width="25px" height="25px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="icomoon-ignore"></g><path d="M2.639 15.992c0 7.366 5.97 13.337 13.337 13.337s13.337-5.97 13.337-13.337-5.97-13.337-13.337-13.337-13.337 5.97-13.337 13.337zM28.245 15.992c0 6.765-5.504 12.27-12.27 12.27s-12.27-5.505-12.27-12.27 5.505-12.27 12.27-12.27c6.765 0 12.27 5.505 12.27 12.27z" fill="#000000"></path><path d="M19.159 16.754l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z" fill="#000000"></path></svg>
-								${index+1}. <div>${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}</div>
+								${svg} ${index+1}. <div>${data.question}</div>
 							</div>
-							<div class="question hide">${model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].question}</div>
+							<div class="question hide">${data.question}</div>
 							${this.getQuestionOptionsFormation(item)}
 						</div>
-						<div class="${this.getAttemptQuestion(item) ? 'answered' : 'unanswered'}">
-							${this.getListLabel(this.getAttemptQuestion(item), index, Number(model.dataAll.set[utils.getCategoryAndQuestionId(item)[0]][utils.getCategoryAndQuestionId(item)[1]].weightage))}
+						<div class="${isQuestionAttempt ? 'answered' : 'unanswered'}">
+							${this.getListLabel(isQuestionAttempt, index, Number(data.weightage))}
 						</div>
-					</li>`
+					</li>`)
+				}
 			)
 			.join("");
 		
@@ -280,31 +291,14 @@ class App {
 
 		const alphbetArray = ["A", "B", "C", "D", "E"];
 
-		const categoryID = utils.getCategoryAndQuestionId(id)[0];
-		const questionID = utils.getCategoryAndQuestionId(id)[1];
+		const categoryID = utils.getCategoryId(id);
+		const questionID = utils.getQuestionId(id);
 
 		const tempCid = model.getUserAttemptQuestions[categoryID];
 		const tempQid = tempCid && tempCid[questionID];
 		const options = model.dataAll.set[categoryID][questionID].options;
 		const type = model.dataAll.set[categoryID][questionID].type;
 		const dropdown = model.dataAll.set[categoryID][questionID].dropdown;
-
-		const userSelected = (item) => {
-			let isSelected = false;
-
-			if(type === 'matching' && item){
-				if(tempQid){
-					isSelected = (+tempQid[item.optionId] === item.isCorrect)
-				}
-			} else {
-				if(tempQid){
-					tempQid.map( i => {
-						isSelected = (item.optionId === Number(i))
-					})
-				}
-			}
-			return isSelected;
-		}
 
 		return `<ul class="optionHolder hide">
 			${options
@@ -314,8 +308,8 @@ class App {
 							n="${item.isCorrect}" 
 							class="
 								${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
-								${userSelected(item) ? 'active' : ''}
-								${(userSelected(item) && (type === 'matching')) ? 'correct' : ''}">
+								${this.userSelected(item, tempQid, type) ? 'active' : ''}
+								${(this.userSelected(item, tempQid, type) && (type === 'matching')) ? 'correct' : ''}">
 						<span class="bullet">${alphbetArray[index]}</span>
 						<p class="option">
 							${item.option}
@@ -327,11 +321,27 @@ class App {
 		</ul>`
 	}
 
+	userSelected(item, tempQid, type){
+		let isSelected = false;
+
+		if(tempQid){
+			if(type === 'matching' && item){
+				isSelected = (+tempQid[item.optionId] === item.isCorrect)
+			} else {
+				tempQid.map( i => {
+					isSelected = (item.optionId === Number(i))
+				})
+			}
+		}
+		
+		return isSelected;
+	}
+
 	getAttemptQuestion(id){
 		let isMatched = false;
 		let tempBoolean = true;
-		const categoryID = utils.getCategoryAndQuestionId(id)[0];
-		const questionID = utils.getCategoryAndQuestionId(id)[1];
+		const categoryID = utils.getCategoryId(id);
+		const questionID = utils.getQuestionId(id);
 
 		const tempCid = model.getUserAttemptQuestions[categoryID];
 		const tempQid = tempCid && tempCid[questionID];
@@ -366,7 +376,6 @@ class App {
 				const score = (weightage > 0) ? weightage : 1;
 				model.setScore(index, score);
 			}
-			
 			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Answered': 'Correct';
 		} else {
 			return (this.currentScreen === 'REVIEW_SCREEN') ? 'Unanswered': 'Incorrect';
@@ -392,8 +401,9 @@ class App {
 					(item, index) => `<li>
 						<div class="selectBoxHolder">
 							<select uid="${item.optionId}">
-								${activeOptions.length === 0 && `<option>Select</option>`}
-								${dropdown.map((item, i) => `<option ${(+activeOptions[index] === numberArray[i]) && 'selected'} value="${numberArray[i]}">${dropdown[i]}</option>`).join("")}
+								${((activeOptions[index] === null) || (activeOptions.length === 0)) && `<option>Select</option>`}
+								${dropdown.map((item, i) => 
+									`<option ${((+activeOptions[index] === numberArray[i]) && (activeOptions[index] !== null)) && 'selected'} value="${numberArray[i]}">${dropdown[i]}</option>`).join("")}
 							</select>
 						</div>
 						<div class="selectLabel" sid="">
@@ -409,6 +419,7 @@ class App {
 			selectionArr.push(null)
 			item.addEventListener('change', function(e){
 				const targetValue = e.currentTarget.value;
+				// removing first option on change
 				let firstOption = e.currentTarget.querySelector('option');
 				if (firstOption && firstOption.textContent === 'Select') {
 					firstOption.remove();
@@ -418,7 +429,8 @@ class App {
 				$this.selectedOption[e.currentTarget.getAttribute('uid')] = targetValue;
 				selectionArr[Number(e.currentTarget.getAttribute('uid'))] = targetValue === "" ? null : targetValue;
 				document.querySelectorAll('#optionHolder li').forEach(function(elm){elm.removeClass('conflict')});
-				const duplicateArr = $this.findDuplicateIndexes(selectionArr);
+
+				const duplicateArr = utils.findDuplicateIndexes(selectionArr);
 				Object.keys(duplicateArr).map( i => {
 					if(i !== 'null'){
 						duplicateArr[i].map( j => {
@@ -428,34 +440,23 @@ class App {
 				})
 
 				e.currentTarget.parentNode.parentNode.querySelector('.selectLabel').setAttr('sid', e.currentTarget.value)
-
-				model.setUserAttemptQuestions = { 
-					"cid": model.getCurrentCategoryId, 
-					"qid": model.getCurrentQuestionId, 
-					"oid": $this.selectedOption
-				}
+				$this.setUserAttemptQuestions($this.selectedOption);
 			})
+		})
+
+		activeOptions.map( (item, index) => {
+			if(item !== null){
+				document.querySelectorAll('#optionHolder select')[index].dispatchEvent(new Event('change'))
+			}
 		})
 	}
 
-	findDuplicateIndexes(arr) {
-		let duplicates = {};
-		arr.forEach((item, index) => {
-			if (duplicates[item]) {
-				duplicates[item].push(index);
-			} else {
-				duplicates[item] = [index];
-			}
-		});
-	
-		let result = {};
-		for (let key in duplicates) {
-			if (duplicates[key].length > 1) {
-				result[key] = duplicates[key];
-			}
+	setUserAttemptQuestions(oid){
+		model.setUserAttemptQuestions = { 
+			"cid": model.getCurrentCategoryId, 
+			"qid": model.getCurrentQuestionId, 
+			"oid": oid
 		}
-	
-		return result;
 	}
 
 	tnfFormation() {
@@ -478,23 +479,13 @@ class App {
 		this.selector("#btnTrue").on("click", "", function (elm) {
 			elm.disabled = true;
 			$this.selector("#btnFalse").disabled = false;
-
-			model.setUserAttemptQuestions = { 
-				"cid": model.getCurrentCategoryId, 
-				"qid": model.getCurrentQuestionId, 
-				"oid": [elm.getAttribute('uid')]
-			}
+			$this.setUserAttemptQuestions([elm.getAttribute('uid')]);
 		});
 
 		this.selector("#btnFalse").on("click", "", function (elm) {
 			$this.selector("#btnTrue").disabled = false;
 			elm.disabled = true;
-
-			model.setUserAttemptQuestions = { 
-				"cid": model.getCurrentCategoryId, 
-				"qid": model.getCurrentQuestionId, 
-				"oid": [elm.getAttribute('uid')]
-			}
+			$this.setUserAttemptQuestions([elm.getAttribute('uid')]);
 		});
 	}
 
@@ -512,6 +503,12 @@ class App {
 				} else {
 					if (model.getCurrentQuestionType === "mmcq") {
 						elm.addClass("active");
+
+						if (elm.class("active")) {
+							$this.selectedOption.push(elm.getAttribute('uid'))
+						} else {
+							$this.selectedOption = $this.selectedOption.filter(item => item !== elm.getAttribute('uid'))
+						}
 					} else {
 						$this
 							.selector("#optionHolder li")
@@ -519,24 +516,11 @@ class App {
 								elmLi.removeClass("active");
 							});
 						elm.addClass("active");
+						$this.selectedOption = [elm.getAttribute('uid')]
 					}
-				}
-
-				if (model.getCurrentQuestionType === "mmcq") {
-					if (elm.class("active")) {
-						$this.selectedOption.push(elm.getAttribute('uid'))
-					} else {
-						$this.selectedOption = $this.selectedOption.filter(item => item !== elm.getAttribute('uid'))
-					}
-				} else {
-					$this.selectedOption = [elm.getAttribute('uid')]
 				}
 				
-				model.setUserAttemptQuestions = { 
-					"cid": model.getCurrentCategoryId, 
-					"qid": model.getCurrentQuestionId, 
-					"oid": $this.selectedOption
-				}
+				$this.setUserAttemptQuestions($this.selectedOption)
 			});
 		}
 		
@@ -568,12 +552,6 @@ class App {
 	}
 
 	//TODO: for demo only will claer later
-	/* async loadManifest() {
-		const response = await fetch("data/manifest.json");
-		return await response.json();
-	} */
-
-	//TODO: for demo only will claer later
 	addListeners() {
 		/* window.dispatchEvent(
 			new CustomEvent("CHAPTER_COMPLETED", {
@@ -585,7 +563,6 @@ class App {
 
 	setSCOData() {
 		if (scoData.trackingMode != null) {
-			//debugger;
 			scoData.setValue("lessonLocation", JSON.stringify(model.data.userData.bookmark));
 			scoData.setValue("suspendData", JSON.stringify(model.data.userData));
 			scoData.setValue("lessonStatus", model.data.userData.status);
