@@ -15,13 +15,13 @@
 	"chapterSubtitle": "Module 1: Engineering: What is the purpose of conducting a site evaluation?",
 	"userData": {
 		"name": "Jone Doe",
-		"userQuestionSet": ["c1q3","c1q18","c1q4","c1q20","c1q9","c1q13","c1q10","c1q1","c1q6","c1q16","c1q8","c1q12","c1q0","c1q15","c1q5","c1q7","c1q17","c1q11","c1q19","c1q2"],
+		"userQuestionSet": [],
 		"questionScore": [],
 		"attemptQuestions": {},
 		"remainTime": 0,
 		"score": 0,
 		"status": "incomplete",
-		"bookmark": "REVIEW_SCREEN",
+		"bookmark": "INTRO_SCREEN",
 		"previousScreen": "null"
 	},
 	"categories": {
