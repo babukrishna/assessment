@@ -124,7 +124,7 @@ class App {
 			case 'REVIEW_SCREEN':
 				this.reviewSection.removeClass('hide');
 				this.reviewQuestion.setHTML(this.reviewQuestionList());
-				this.nextBtn.disabled = false;
+				this.nextBtn.disabled = true;
 				this.previousBtn.disabled = false;
 				break;
 			case 'END_SCREEN':
