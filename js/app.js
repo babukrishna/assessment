@@ -440,7 +440,7 @@ class App {
 				})
 
 				e.currentTarget.parentNode.parentNode.querySelector('.selectLabel').setAttr('sid', e.currentTarget.value)
-				$this.setUserAttemptQuestions($this.selectedOption);
+				$this.setUserAttemptQuestions(selectionArr);
 			})
 		})
 
