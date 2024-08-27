@@ -47,7 +47,7 @@ class App {
 		// counter
 		this.counter = 0;
 		//this.tempCounter = -1;
-		this.currentScreen = model.getUserData('bookmark').split('&')[0];
+		this.currentScreen = model.getUserData('bookmark').split('&')[0].toUpperCase();
 		if(model.getUserData('bookmark').split('&').length === 2){
 			this.counter = Number(model.getUserData('bookmark').split('&')[1])
 		}
@@ -70,7 +70,7 @@ class App {
 	timeManager(){
 		if(!this.isTimerStart){
 			this.isTimerStart = true;
-			let time = model.dataAll.time;
+			let time = Number(model.dataAll.time);
 			this.timer.setHTML(utils.convertMinutesToHours(time));
 			const $this = this;
 
@@ -297,7 +297,7 @@ class App {
 		const tempCid = model.getUserAttemptQuestions[categoryID];
 		const tempQid = tempCid && tempCid[questionID];
 		const options = model.dataAll.set[categoryID][questionID].options;
-		const type = model.dataAll.set[categoryID][questionID].type;
+		const type = model.dataAll.set[categoryID][questionID].type.toLowerCase();
 		const dropdown = model.dataAll.set[categoryID][questionID].dropdown;
 
 		return `<ul class="optionHolder hide">
@@ -307,13 +307,13 @@ class App {
 							uid="${item.optionId}" 
 							n="${item.isCorrect}" 
 							class="
-								${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
+								${(type !== 'matching') && (Number(item.isCorrect) === 1) ? 'correct' : ''} 
 								${this.userSelected(item, tempQid, type) ? 'active' : ''}
 								${(this.userSelected(item, tempQid, type) && (type === 'matching')) ? 'correct' : ''}">
 						<span class="bullet">${alphbetArray[index]}</span>
 						<p class="option">
 							${item.option}
-							${(type === 'matching') ? `<i class="selection">(${dropdown[item.isCorrect]})</i>` : '' }</p>
+							${(type === 'matching') ? `<i class="selection"> (${dropdown[item.isCorrect]})</i>` : '' }</p>
 					</li>`
 				)
 				.join("")
@@ -351,14 +351,14 @@ class App {
 		} else {
 			if(tempCid && tempQid){
 				model.dataAll.set[categoryID][questionID].options.map( item => {
-					if(model.dataAll.set[categoryID][questionID].type === 'matching'){
+					if(model.dataAll.set[categoryID][questionID].type.toLowerCase() === 'matching'){
 						if(tempBoolean){
-							isMatched = (+tempQid[item.optionId] === item.isCorrect);
+							isMatched = (Number(tempQid[item.optionId]) === Number(item.isCorrect));
 							tempBoolean = isMatched;
 						}
 					} else {
 						for(let i=0; i < tempQid.length; i++){
-							if(item.optionId === Number(tempQid[i]) && tempBoolean){
+							if(Number(item.optionId) === Number(tempQid[i]) && tempBoolean){
 								isMatched = (item.isCorrect === 1);
 								tempBoolean = isMatched;
 							}

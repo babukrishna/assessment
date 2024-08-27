@@ -136,7 +136,7 @@ class Model {
 	}
 	// get current question type as per current category and question id
 	get getCurrentQuestionType(){
-		return this.data.set[this.getCurrentCategoryId][this.getCurrentQuestionId].type;
+		return this.data.set[this.getCurrentCategoryId][this.getCurrentQuestionId].type.toLowerCase();
 	}
 	// get current question options as per current category and question id
 	get getCurrentOptions(){
