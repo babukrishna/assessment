@@ -321,8 +321,8 @@ class App {
 								</p>
 						</div>
 						<div class="resultInnerHolder">
-							<span class="correctAnswer">Correct Answer ${(type === 'matching') ? `: <i>(${dropdown[item.isCorrect]})</i>` : '' }</span>
-							<span class="yourAnswer">Your Answer ${(type === 'matching') ? `: <i>(${dropdown[tempQid[index]]})</i>` : '' }</span>
+							<span class="correctAnswer">Correct Answer ${(type === 'matching') ? `: <i>${dropdown[item.isCorrect]}</i>` : '' }</span>
+							${(type === 'matching') ? `${tempQid ? `<span class="yourAnswer">Your Answer: <i>${dropdown[tempQid[index]] ? dropdown[tempQid[index]] : ''}</i></span>` : ''}` : `<span class="yourAnswer">Your Answer</span>`}
 						</div>
 					</li>`)}
 				)
