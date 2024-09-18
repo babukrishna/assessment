@@ -277,8 +277,15 @@ main {
 			>li{
 				@include media(allTouchDevice){
 					flex-direction: column;
+          gap: 2px;
 				}
 			}
+    }
+
+    .resultInnerHolder{
+      @include media(allTouchDevice){
+        flex-direction: row;
+      }
     }
   }
 

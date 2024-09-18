@@ -309,21 +309,23 @@ class App {
 				.map(
 					(item, index) => {
 						const userSelectedItems = this.userSelected(item, tempQid, type);
-
-						return(`<li 
-							uid="${item.optionId}" 
-							n="${item.isCorrect}" 
-							class="${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} ${userSelectedItems ? 'active' : ''} ${(userSelectedItems && (type === 'matching')) ? 'correct' : ''}  ${type === 'matching' ? 'matching':''}">
-						<div class="optionInnerHolder">
-							<span class="bullet">${alphbetArray[index]}</span>
-							<p class="option">
-								${item.option}
-								</p>
-						</div>
-						<div class="resultInnerHolder">
-							<span class="correctAnswer">Correct Answer ${(type === 'matching') ? `: <i>${dropdown[item.isCorrect]}</i>` : '' }</span>
-							${(type === 'matching') ? `${tempQid ? `<span class="yourAnswer">Your Answer: <i>${dropdown[tempQid[index]] ? dropdown[tempQid[index]] : ''}</i></span>` : ''}` : `<span class="yourAnswer">Your Answer</span>`}
-						</div>
+						
+						return(`<li uid="${item.optionId}" n="${item.isCorrect}" 
+							class="
+								${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
+								${userSelectedItems ? 'active' : ''} 
+								${(userSelectedItems && (type === 'matching')) ? 'correct' : ''}  
+								${type === 'matching' ? 'matching':''}">
+									<div class="optionInnerHolder">
+										<span class="bullet">${alphbetArray[index]}</span>
+										<p class="option">
+											${item.option}
+											</p>
+									</div>
+									<div class="resultInnerHolder">
+										<span class="correctAnswer">Correct Answer ${(type === 'matching') ? `: <i>${dropdown[item.isCorrect]}</i>` : '' }</span>
+										${(type === 'matching') ? `${tempQid ? `<span class="yourAnswer">Your Answer: <i>${dropdown[tempQid[index]] ? dropdown[tempQid[index]] : ''}</i></span>` : ''}` : `<span class="yourAnswer">Your Answer</span>`}
+									</div>
 					</li>`)}
 				)
 				.join("")
@@ -333,13 +335,18 @@ class App {
 
 	userSelected(item, tempQid, type){
 		let isSelected = false;
+		let breaker = true;
 
 		if(tempQid){
 			if(type === 'matching' && item){
 				isSelected = (+tempQid[item.optionId] === item.isCorrect)
 			} else {
 				tempQid.map( i => {
-					isSelected = (item.optionId === Number(i))
+					const isSelectionMatching = (Number(item.optionId) === Number(i))
+					if(isSelectionMatching && breaker){
+						breaker = false;
+						isSelected = true;
+					}
 				})
 			}
 		}

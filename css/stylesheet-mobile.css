@@ -261,6 +261,12 @@ main.introSection .right {
 @media screen and (max-width: 820px) and (orientation: portrait), screen and (max-width: 896px) and (orientation: landscape) {
   main.endSection .optionHolder > li {
     flex-direction: column;
+    gap: 2px;
+  }
+}
+@media screen and (max-width: 820px) and (orientation: portrait), screen and (max-width: 896px) and (orientation: landscape) {
+  main.endSection .resultInnerHolder {
+    flex-direction: row;
   }
 }
 @media screen and (max-width: 820px) and (orientation: portrait), screen and (max-width: 896px) and (orientation: landscape) {
