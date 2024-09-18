@@ -303,7 +303,7 @@ class App {
 		const options = model.dataAll.set[categoryID][questionID].options;
 		const type = model.dataAll.set[categoryID][questionID].type.toLowerCase();
 		const dropdown = model.dataAll.set[categoryID][questionID].dropdown;
-		console.log(tempQid)
+		
 		return `<ul class="optionHolder hide">
 			${options
 				.map(
