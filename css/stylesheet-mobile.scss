@@ -46,335 +46,339 @@
 	--footer-background-color: var(--white);
 } */
 
-body{
-	@include media(allTouchDevice){
-		height: auto;
-	}
+body {
+  @include media(allTouchDevice) {
+    height: auto;
+  }
 }
 
 .desktopOnly {
-	display: block;
-	@include media(allTouchDevice) {
-		display: none !important;
-	}
+  display: block;
+  @include media(allTouchDevice) {
+    display: none !important;
+  }
 }
 
 .mobileOnly {
-	display: none;
-	@include media(allTouchDevice) {
-		display: block;
-	}
+  display: none;
+  @include media(allTouchDevice) {
+    display: block;
+  }
 }
 
 .desktopOnlyInline {
-	display: inline-block;
-	@include media(allTouchDevice) {
-		display: none !important;
-	}
+  display: inline-block;
+  @include media(allTouchDevice) {
+    display: none !important;
+  }
 }
 
 .mobileOnlyInline {
-	display: none;
-	@include media(allTouchDevice) {
-		display: inline-block;
-	}
+  display: none;
+  @include media(allTouchDevice) {
+    display: inline-block;
+  }
 }
 
 button {
-	@include media(allTouchDevice){
-		padding: 5px 10px;
-		font-size: 17px;
-	}
+  @include media(allTouchDevice) {
+    padding: 5px 10px;
+    font-size: 17px;
+  }
 }
 
 .mainContainer {
-	@include media(allTouchDevice){
-		overflow-y: auto;
-	}
+  @include media(allTouchDevice) {
+    overflow-y: auto;
+  }
 
-	.section {
-		@include media(allTouchDevice){
-			display: flex;
-			flex-flow: column;
-			min-height: 100vh;
-			background-color: var(--main-background-color);
-            padding: 0;
-		}
-	}
+  .section {
+    @include media(allTouchDevice) {
+      display: flex;
+      flex-flow: column;
+      min-height: 100vh;
+      background-color: var(--main-background-color);
+      padding: 0;
+    }
+  }
 }
 
 header {
-	@include media(allTouchDevice) {
-		position: fixed;
-		top: 0;
-		left: 0;
-		order: 1;
-		z-index: 1;
-	}
+  @include media(allTouchDevice) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    order: 1;
+    z-index: 1;
+  }
 
-	.chapter {
-		.title {
-			@include media(allTouchDevice) {
-				display: none;
-			}
-		}
+  .chapter {
+    .title {
+      @include media(allTouchDevice) {
+        display: none;
+      }
+    }
 
-		.subtitle {
-			@include media(allTouchDevice) {
-				padding: 10px 15px;
-				font-size: 16px;
-				font-weight: 400;
-				height: 56px;
-			}
-		}
-	}
+    .subtitle {
+      @include media(allTouchDevice) {
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: 400;
+        height: 56px;
+      }
+    }
+  }
 
-	.user {
-		@include media(allTouchDevice) {
-			display: none;
-		}
-	}
+  .user {
+    @include media(allTouchDevice) {
+      display: none;
+    }
+  }
 }
 
-.main{
-	@include media(allTouchDevice){
-		order: 3;
-		margin-top: 110px;
-		height: 100%;
-	}
+.main {
+  @include media(allTouchDevice) {
+    order: 3;
+    margin-top: 110px;
+    height: 100%;
+  }
 }
 
 main {
+  @include media(allTouchDevice) {
+    height: 100%;
+    flex-flow: column;
+    padding-bottom: 20px;
+  }
+
+  &.introSection {
     @include media(allTouchDevice) {
-        height: 100%;
-		flex-flow: column;
-		padding-bottom: 20px;
+      flex-direction: column;
+      overflow-y: auto;
+      height: 100%;
+      padding-bottom: 0;
     }
 
-	&.introSection {
-		@include media(allTouchDevice) {
-			flex-direction: column;
-			overflow-y: auto;
-			height: 100%;
-			padding-bottom: 0;
-		}
+    .left {
+      @include media(allTouchDevice) {
+        padding: 15px;
+        width: 100%;
+      }
 
-		.left {
-			@include media(allTouchDevice) {
-				padding: 15px;
-                width: 100%;
-			}
-
-            h1{
-                @include media(allTouchDevice) {
-                    font-size: 3.5em;
-                }   
-            }
-		}
-
-        .right{
-            width: 100%;
+      h1 {
+        @include media(allTouchDevice) {
+          font-size: 3.5em;
         }
+      }
+    }
 
-        .whiteBox{
-            @include media(allTouchDevice) {
-                font-size: 14px;
-                margin-top: 0;
-            }
+    .right {
+      width: 100%;
+    }
+
+    .whiteBox {
+      @include media(allTouchDevice) {
+        font-size: 14px;
+        margin-top: 0;
+      }
+    }
+  }
+
+  &.instructionSection {
+    @include media(allTouchDevice) {
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .holder {
+      @include media(allTouchDevice) {
+        padding: 15px;
+      }
+    }
+  }
+
+  &.questionSection {
+    @include media(allTouchDevice) {
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    .left {
+      @include media(allTouchDevice) {
+        display: none;
+      }
+    }
+
+    .right {
+      @include media(allTouchDevice) {
+        padding: 15px;
+        width: 100%;
+      }
+    }
+
+    .timer {
+      @include media(allTouchDevice) {
+        font-size: 14px;
+      }
+
+      svg {
+        @include media(allTouchDevice) {
+          width: 20px;
         }
-	}
+      }
+    }
+  }
 
-	&.instructionSection{
-        @include media(allTouchDevice){
-            height: 100%;
-			overflow-y: auto;
-        }
+  &.reviewSection {
+    @include media(allTouchDevice) {
+      padding: 0;
+      height: 100%;
+    }
 
-        .holder{
-            @include media(allTouchDevice){
-                padding: 15px;
-            }
-        }
-		
-	}
+    .top {
+      @include media(allTouchDevice) {
+        padding: 15px;
+        flex-flow: column;
+        font-size: 25px;
+        gap: 20px;
+      }
+    }
 
-	&.questionSection {
-		@include media(allTouchDevice){
-			overflow-y: auto;
-			height: 100%;
-		}
+    button {
+      @include media(allTouchDevice) {
+        font-size: 20px;
+        padding: 20px;
+      }
+    }
 
-		.left {
-			@include media(allTouchDevice){
-				display: none;
-			}
-		}
+    #reviewHolder {
+      @include media(allTouchDevice) {
+        padding: 0 15px 20px;
+      }
+    }
+  }
 
-		.right {
-			@include media(allTouchDevice){
-				padding: 15px;
-				width: 100%;
-			}
-		}
+  &.endSection {
+    @include media(allTouchDevice) {
+      height: 100%;
+    }
 
-		.timer {
-			@include media(allTouchDevice){
-				font-size: 14px;
-			}
+    .holder {
+      @include media(allTouchDevice) {
+        padding: 15px;
+      }
+    }
 
-			svg {
-				@include media(allTouchDevice){
-					width: 20px;
-				}
-			}
-		}
-	}
-
-	&.reviewSection {
-        @include media(allTouchDevice){
-            padding: 0;
-            height: 100%;
-        }
-
-        .top{
-            @include media(allTouchDevice){
-                padding: 15px;
-                flex-flow: column;
-                font-size: 25px;
-				gap: 20px;
-            }
-        }
-
-        button {
-            @include media(allTouchDevice){
-                font-size: 20px;
-                padding: 20px;
-            }
-		}
-
-        #reviewHolder{
-            @include media(allTouchDevice){
-                padding: 0 15px 20px;
-            }
-        }
-		
-	}
-
-	&.endSection {
-        @include media(allTouchDevice){
-            height: 100%;
-        }
-
-        .holder{
-            @include media(allTouchDevice){
-                padding: 15px;
-            }
-        }
-
-        .optionHolder{
-            @include media(allTouchDevice){
-                padding-left: 0;
-            }
-        }
-	}
-
-    .optionHolder{
-		&.matching{
-			@include media(allTouchDevice){
-				gap: 20px;
-				border-bottom: 0;
-			}
+    .optionHolder {
+      @include media(allTouchDevice) {
+        padding-left: 0;
+      }
 
 			>li{
 				@include media(allTouchDevice){
-					flex-flow: column;
+					flex-direction: column;
 				}
 			}
-			.selectBoxHolder{
-				@include media(allTouchDevice){
-					width: 100%;
-					order: 2;
-					border-top: 0;
-					border-bottom: 1px solid var(--black);
-				}
-			}
-			.selectLabel{
-				@include media(allTouchDevice){
-					width: 100%;
-					order: 1;
-					border-left: 1px solid var(--black);
-					padding: 10px 10px 10px 5px;
-				}
-			}
-		}
+    }
+  }
+
+  .optionHolder {
+    &.matching {
+      @include media(allTouchDevice) {
+        gap: 20px;
+        border-bottom: 0;
+      }
+
+      > li {
+        @include media(allTouchDevice) {
+          flex-flow: column;
+        }
+      }
+      .selectBoxHolder {
+        @include media(allTouchDevice) {
+          width: 100%;
+          order: 2;
+          border-top: 0;
+          border-bottom: 1px solid var(--black);
+        }
+      }
+      .selectLabel {
+        @include media(allTouchDevice) {
+          width: 100%;
+          order: 1;
+          border-left: 1px solid var(--black);
+          padding: 10px 10px 10px 5px;
+        }
+      }
+    }
+  }
+
+  #optionHolderForMobile {
+    @include media(allTouchDevice) {
+      margin-top: 20px;
     }
 
-	#optionHolderForMobile{
-		@include media(allTouchDevice){
-			margin-top: 20px;
-		}
-
-		>li{
-			@include media(allTouchDevice){
-				width: 100%;
-				border-radius: 0;
-				border-left: 1px solid var(--black);
-				padding: 10px;
-				gap: 10px;
-			}
-		}
-	}
-
-    .listing{
-        >li{
-            @include media(allTouchDevice){
-                position: relative;
-				flex-flow: column;
-            }
-        }
-
-		.question{
-			@include media(allTouchDevice){
-				display: block;
-			}
-		}
-
-		.contentHolder{
-			> div{
-				@include media(allTouchDevice){
-					width: 140px;
-				}
-			}
-
-			&.open{
-				>div{
-					@include media(allTouchDevice){
-						opacity: 0;
-					}
-				}
-			}
-		}
-
-        .unanswered, 
-        .answered{
-            position: absolute;
-            right: 0;
-        }
-
-		.header{
-			@include media(allTouchDevice){
-				flex-flow: row;
-			}
-		}
+    > li {
+      @include media(allTouchDevice) {
+        width: 100%;
+        border-radius: 0;
+        border-left: 1px solid var(--black);
+        padding: 10px;
+        gap: 10px;
+      }
     }
+  }
+
+  .listing {
+    > li {
+      @include media(allTouchDevice) {
+        position: relative;
+        flex-flow: column;
+      }
+    }
+
+    .question {
+      @include media(allTouchDevice) {
+        display: block;
+      }
+    }
+
+    .contentHolder {
+      > div {
+        @include media(allTouchDevice) {
+          width: 140px;
+        }
+      }
+
+      &.open {
+        > div {
+          @include media(allTouchDevice) {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    .unanswered,
+    .answered {
+      position: absolute;
+      right: 0;
+    }
+
+    .header {
+      @include media(allTouchDevice) {
+        flex-flow: row;
+      }
+    }
+  }
 }
 
 footer {
-	@include media(allTouchDevice){
-		order: 2;
-		padding: 10px 15px;
-		margin-top: 56px;
-    	position: fixed;
-        border-bottom: 1px solid var(--gray);
-	}
+  @include media(allTouchDevice) {
+    order: 2;
+    padding: 10px 15px;
+    margin-top: 56px;
+    position: fixed;
+    border-bottom: 1px solid var(--gray);
+  }
 }

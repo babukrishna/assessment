@@ -410,16 +410,89 @@ main {
 			overflow-y: auto;
 		}
 
+		.content{
+			width: 100%;
+		}
+
+		.hideResultInnerHolder{
+			.resultInnerHolder{
+				display: none;
+			}
+		}
+
 		.optionHolder{
 			padding-left: 30px;
+			width: 100;
 
 			>li{
 				pointer-events: none;
+				border: none;
+				background-color: transparent;
+				padding: 0;
+
+				&.correct  {
+					background-color: transparent;
+
+					.optionInnerHolder{
+						background-color: var(--end-correct-background-color);;
+					}
+
+					.correctAnswer{
+						display: block;
+					}
+				}
+				&.active{
+					.yourAnswer{
+						display: block;
+					}
+				}
+				&.matching{
+					.correctAnswer,
+					.yourAnswer{
+						display: block;
+					}
+				}
 			}
 		}
 
 		.answered {
 			color: var(--success);
+		}
+
+		.optionInnerHolder{
+			padding: 8px;
+			border: 2px solid;
+			border-radius: 5px;
+			background-color: var(--white);
+			display: flex;
+			gap: 10px;
+			cursor: pointer;
+			min-width: calc(100% - 250px);
+		}
+
+		.resultInnerHolder{
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+		}
+
+		.correctAnswer{
+			background-color: #2d7f31 !important;
+		}
+
+		.yourAnswer{
+			background-color: #fda715 !important;
+		}
+
+		.correctAnswer,
+		.yourAnswer{
+			display: none;
+			font-size: 14px;
+			line-height: 14px;
+			padding: 5px 8px;
+			width: auto;
+			height: auto;
+			color: var(--white);
 		}
 	}
 

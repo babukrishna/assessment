@@ -47,7 +47,7 @@ class App {
 		// counter
 		this.counter = 0;
 		//this.tempCounter = -1;
-		this.currentScreen = model.getUserData('bookmark').split('&')[0];
+		this.currentScreen = model.getUserData('bookmark').split('&')[0].toUpperCase();
 		if(model.getUserData('bookmark').split('&').length === 2){
 			this.counter = Number(model.getUserData('bookmark').split('&')[1])
 		}
@@ -64,13 +64,14 @@ class App {
 		this.chapterTitle.setHTML(model.dataAll.chapterTitle);
 		this.userName.setHTML(model.dataAll.userData.name);
 
+		this.isOptionClickable = true;
 		this.pageLoader();
 	}
 
 	timeManager(){
 		if(!this.isTimerStart){
 			this.isTimerStart = true;
-			let time = model.dataAll.time;
+			let time = Number(model.dataAll.time);
 			this.timer.setHTML(utils.convertMinutesToHours(time));
 			const $this = this;
 
@@ -107,9 +108,11 @@ class App {
 				this.questionSection.removeClass('hide');
 
 				this.optionHolder.removeClass('matching');
+				this.isOptionClickable = true;
 				if(model.getCurrentQuestionType === "tnf"){
 					this.tnfFormation();
 				}else if(model.getCurrentQuestionType === "matching"){
+					this.isOptionClickable = false;
 					this.matchingFormation();
 				}else{
 					this.mmcqFormation();
@@ -261,9 +264,10 @@ class App {
 				(item, index) =>{
 					const data = model.dataAll.set[utils.getCategoryId(item)][utils.getQuestionId(item)];
 					const isQuestionAttempt = this.getAttemptQuestion(item);
+					const isCorrectAnswer = this.getListLabel(isQuestionAttempt, index, Number(data.weightage));
 
 					return (`<li data-index="${index}">
-						<div class="content">
+						<div class="content ${isCorrectAnswer.toLocaleLowerCase() === 'correct' ? 'hideResultInnerHolder':''}">
 							<div class="contentHolder">
 								${svg} ${index+1}. <div>${data.question}</div>
 							</div>
@@ -271,7 +275,7 @@ class App {
 							${this.getQuestionOptionsFormation(item)}
 						</div>
 						<div class="${isQuestionAttempt ? 'answered' : 'unanswered'}">
-							${this.getListLabel(isQuestionAttempt, index, Number(data.weightage))}
+							${isCorrectAnswer}
 						</div>
 					</li>`)
 				}
@@ -297,24 +301,30 @@ class App {
 		const tempCid = model.getUserAttemptQuestions[categoryID];
 		const tempQid = tempCid && tempCid[questionID];
 		const options = model.dataAll.set[categoryID][questionID].options;
-		const type = model.dataAll.set[categoryID][questionID].type;
+		const type = model.dataAll.set[categoryID][questionID].type.toLowerCase();
 		const dropdown = model.dataAll.set[categoryID][questionID].dropdown;
-
+		console.log(tempQid)
 		return `<ul class="optionHolder hide">
 			${options
 				.map(
-					(item, index) => `<li 
+					(item, index) => {
+						const userSelectedItems = this.userSelected(item, tempQid, type);
+
+						return(`<li 
 							uid="${item.optionId}" 
 							n="${item.isCorrect}" 
-							class="
-								${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
-								${this.userSelected(item, tempQid, type) ? 'active' : ''}
-								${(this.userSelected(item, tempQid, type) && (type === 'matching')) ? 'correct' : ''}">
-						<span class="bullet">${alphbetArray[index]}</span>
-						<p class="option">
-							${item.option}
-							${(type === 'matching') ? `<i class="selection">(${dropdown[item.isCorrect]})</i>` : '' }</p>
-					</li>`
+							class="${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} ${userSelectedItems ? 'active' : ''} ${(userSelectedItems && (type === 'matching')) ? 'correct' : ''}  ${type === 'matching' ? 'matching':''}">
+						<div class="optionInnerHolder">
+							<span class="bullet">${alphbetArray[index]}</span>
+							<p class="option">
+								${item.option}
+								</p>
+						</div>
+						<div class="resultInnerHolder">
+							<span class="correctAnswer">Correct Answer ${(type === 'matching') ? `: <i>(${dropdown[item.isCorrect]})</i>` : '' }</span>
+							<span class="yourAnswer">Your Answer ${(type === 'matching') ? `: <i>(${dropdown[tempQid[index]]})</i>` : '' }</span>
+						</div>
+					</li>`)}
 				)
 				.join("")
 			}
@@ -351,14 +361,14 @@ class App {
 		} else {
 			if(tempCid && tempQid){
 				model.dataAll.set[categoryID][questionID].options.map( item => {
-					if(model.dataAll.set[categoryID][questionID].type === 'matching'){
+					if(model.dataAll.set[categoryID][questionID].type.toLowerCase() === 'matching'){
 						if(tempBoolean){
-							isMatched = (+tempQid[item.optionId] === item.isCorrect);
+							isMatched = (Number(tempQid[item.optionId]) === Number(item.isCorrect));
 							tempBoolean = isMatched;
 						}
 					} else {
 						for(let i=0; i < tempQid.length; i++){
-							if(item.optionId === Number(tempQid[i]) && tempBoolean){
+							if(Number(item.optionId) === Number(tempQid[i]) && tempBoolean){
 								isMatched = (item.isCorrect === 1);
 								tempBoolean = isMatched;
 							}
@@ -440,7 +450,7 @@ class App {
 				})
 
 				e.currentTarget.parentNode.parentNode.querySelector('.selectLabel').setAttr('sid', e.currentTarget.value)
-				$this.setUserAttemptQuestions($this.selectedOption);
+				$this.setUserAttemptQuestions(selectionArr);
 			})
 		})
 
@@ -497,6 +507,9 @@ class App {
 		if (!this.optionHolder.getAttribute("listener")) {
 			this.optionHolder.setAttr("listener", "true");
 			this.optionHolder.on("click", "LI", function (elm) {
+				if(!$this.isOptionClickable){
+					return false;
+				}
 				// twice click remove active class
 				if (elm.class("active")) {
 					elm.removeClass("active");
