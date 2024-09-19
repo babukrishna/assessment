@@ -287,6 +287,13 @@ main {
         flex-direction: row;
       }
     }
+
+    .correctAnswer,
+		.yourAnswer{
+      @include media(allTouchDevice){
+        width: auto;
+      }
+		}
   }
 
   .optionHolder {

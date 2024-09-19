@@ -422,7 +422,7 @@ main {
 
 		.optionHolder{
 			padding-left: 30px;
-			width: 100;
+			width: 100%;
 
 			>li{
 				pointer-events: none;
@@ -493,6 +493,7 @@ main {
 			width: auto;
 			height: auto;
 			color: var(--white);
+			width: 220px;
 		}
 	}
 

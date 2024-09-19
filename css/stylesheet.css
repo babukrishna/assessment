@@ -561,7 +561,7 @@ main.endSection .hideResultInnerHolder .resultInnerHolder {
 }
 main.endSection .optionHolder {
   padding-left: 30px;
-  width: 100;
+  width: 100%;
 }
 main.endSection .optionHolder > li {
   pointer-events: none;
@@ -618,6 +618,7 @@ main.endSection .yourAnswer {
   width: auto;
   height: auto;
   color: var(--white);
+  width: 220px;
 }
 main .optionHolder {
   padding: 0;

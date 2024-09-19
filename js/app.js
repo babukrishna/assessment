@@ -313,7 +313,8 @@ class App {
 						return(`<li uid="${item.optionId}" n="${item.isCorrect}" 
 							class="
 								${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
-								${userSelectedItems ? 'active' : ''} 
+								${userSelectedItems ? 'active' : ''}
+								${((type === 'matching') && tempQid && tempQid[index] && dropdown[tempQid[index]]) ? 'active' : ''} 
 								${(userSelectedItems && (type === 'matching')) ? 'correct' : ''}  
 								${type === 'matching' ? 'matching':''}">
 									<div class="optionInnerHolder">
