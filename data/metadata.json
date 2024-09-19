@@ -6,7 +6,7 @@
 	"questionSetFromCategories": [
 		{
 			"categoryId": "c0",
-			"numberOfQuestions": 20,
+			"numberOfQuestions": 10,
 			"random": true
 		}
 	],
@@ -15,7 +15,7 @@
 	"chapterSubtitle": "Module 1: Solar Theory & General Knowledge",
 	"userData": {
 		"name": "Jane Doe",
-		"userQuestionSet": [],
+		"userQuestionSet": ["c0q0","c0q6","c0q4","c0q3","c0q1","c0q8","c0q9","c0q7","c0q2","c0q5"],
 		"questionScore": [],
 		"attemptQuestions": {},
 		"remainTime": 0,
@@ -44,12 +44,12 @@
 					},
 					{
 						"optionId": 1,
-						"isCorrect": 1,
+						"isCorrect": 0,
 						"option": "The process of converting photons from the sun into voltage"
 					},
 					{
 						"optionId": 2,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "A system of monitoring voltage from a solar array"
 					},
 					{
@@ -76,18 +76,18 @@
 					},
 					{
 						"optionId": 2,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "It's the resistance in an electrical circuit"
 					},
 					{
 						"optionId": 3,
-						"isCorrect": 1,
+						"isCorrect": 0,
 						"option": "It's the pressure that pushes the current in a electrical circuit"
 					}
 				]
 			},
 			"q2": {
-				"type": "mcq",
+				"type": "mmcq",
 				"question": "AC Voltage...",
 				"weightage": 0,
 				"options": [
@@ -108,7 +108,7 @@
 					},
 					{
 						"optionId": 3,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "Is not dangerous"
 					}
 				]
@@ -143,7 +143,7 @@
 				]
 			},
 			"q4": {
-				"type": "mcq",
+				"type": "mmcq",
 				"question": "If the voltage in a circuit is 120 and the watts is 480, what is the amps?",
 				"weightage": 0,
 				"options": [
@@ -159,7 +159,7 @@
 					},
 					{
 						"optionId": 2,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "600"
 					},
 					{
@@ -170,7 +170,7 @@
 				]
 			},
 			"q5": {
-				"type": "mcq",
+				"type": "mmcq",
 				"question": "How are solar panels sized?",
 				"weightage": 0,
 				"options": [
@@ -181,7 +181,7 @@
 					},
 					{
 						"optionId": 1,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "Inches"
 					},
 					{
@@ -197,7 +197,7 @@
 				]
 			},
 			"q6": {
-				"type": "mcq",
+				"type": "mmcq",
 				"question": "Solar panels produce…",
 				"weightage": 0,
 				"options": [
@@ -213,7 +213,7 @@
 					},
 					{
 						"optionId": 2,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "No current"
 					},
 					{
@@ -224,7 +224,7 @@
 				]
 			},
 			"q7": {
-				"type": "mcq",
+				"type": "mmcq",
 				"question": "Which statement is true?",
 				"weightage": 0,
 				"options": [
@@ -235,7 +235,7 @@
 					},
 					{
 						"optionId": 1,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "Monocrystalline solar modules are the most inexpensive"
 					},
 					{
@@ -251,7 +251,7 @@
 				]
 			},
 			"q8": {
-				"type": "mcq",
+				"type": "mmcq",
 				"question": "Which statement is true?",
 				"weightage": 0,
 				"options": [
@@ -267,7 +267,7 @@
 					},
 					{
 						"optionId": 2,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "Higher efficient modules have no effect on their size"
 					},
 					{
@@ -278,13 +278,13 @@
 				]
 			},
 			"q9": {
-				"type": "mcq",
+				"type": "mmcq",
 				"question": "Peak Sun Hours...",
 				"weightage": 0,
 				"options": [
 					{
 						"optionId": 0,
-						"isCorrect": 0,
+						"isCorrect": 1,
 						"option": "Are a unit of measure for how much sun a location gets"
 					},
 					{
@@ -301,303 +301,6 @@
 						"optionId": 3,
 						"isCorrect": 1,
 						"option": "All of the above"
-					}
-				]
-			},
-			"q10": {
-				"type": "mcq",
-				"question": "Solar Panels degrade from...",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Rust"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Heat"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Moisture"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Light induced degradation"
-					}
-				]
-			},
-			"q11": {
-				"type": "mcq",
-				"question": "The junction box on a solar panel contains...",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "MC-4 connectors"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 1,
-						"option": "Bypass diodes"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Silicon cells"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 0,
-						"option": "Interconnection bus bars"
-					}
-				]
-			},
-			"q12": {
-				"type": "mcq",
-				"question": "The maximum power on a solar panel is measured in...",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Volts"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Amps"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Ohms"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "Watts"
-					}
-				]
-			},
-			"q13": {
-				"type": "mcq",
-				"question": "A grid tied inverter...",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 1,
-						"option": "Switches the electrical power from DC to AC"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Switches the electrical power from AC to DC"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Switches the electrical power from Volts to Amps"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 0,
-						"option": "Switches the electrical power from Watts to Volts"
-					}
-				]
-			},
-			"q14": {
-				"type": "mcq",
-				"question": "Which of these is not an inverter?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Micro"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "String"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Central"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "All are inverters"
-					}
-				]
-			},
-			"q15": {
-				"type": "mcq",
-				"question": "Which of these inverters allows for system monitoring?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "String"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 1,
-						"option": "Micro"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Central"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 0,
-						"option": "Hybrid"
-					}
-				]
-			},
-			"q16": {
-				"type": "mcq",
-				"question": "What is Anti Islanding?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Inverter reduces voltage in cloudy weather"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 1,
-						"option": "Safety feature that won’t allow the inverter to turn on when no grid power present"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Inverter won’t turn on when it is raining"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 0,
-						"option": "System is neutralized when a ground fault is present"
-					}
-				]
-			},
-			"q17": {
-				"type": "mcq",
-				"question": "Net Metering is...",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 1,
-						"option": "Generating and storing power on the grid for future use"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Storing power in batteries for future use"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Reducing the carbon footprint by using electric cars"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 0,
-						"option": "Combining solar and wind power to reduce consumption"
-					}
-				]
-			},
-			"q18": {
-				"type": "mcq",
-				"question": "A rebate is...",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "A loan that needs to be repaid"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Money that is borrowed and is expected to be paid back with interest"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 1,
-						"option": "A partial refund of the cost of a service or item"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 0,
-						"option": "None of the above"
-					}
-				]
-			},
-			"q19": {
-				"type": "mcq",
-				"question": "Which are available funding sources?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Indigenous and Northern Affairs Canada (INAC)"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Independent Electricity System Operator (IESO)"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 0,
-						"option": "Natural Resources Canada (NRCan)"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 1,
-						"option": "All of the above"
-					}
-				]
-			},
-			"q20": {
-				"type": "mcq",
-				"question": "How do you calculate ROI (return on investment)?",
-				"weightage": 0,
-				"options": [
-					{
-						"optionId": 0,
-						"isCorrect": 0,
-						"option": "Annual hydro costs divided by cost of solar system"
-					},
-					{
-						"optionId": 1,
-						"isCorrect": 0,
-						"option": "Hydro costs times cost of solar system"
-					},
-					{
-						"optionId": 2,
-						"isCorrect": 1,
-						"option": "Solar system costs divided by annual hydro costs"
-					},
-					{
-						"optionId": 3,
-						"isCorrect": 0,
-						"option": "Solar system costs plus hydro costs"
 					}
 				]
 			}

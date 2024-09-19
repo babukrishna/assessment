@@ -268,12 +268,11 @@ class App {
 
 					return (`<li data-index="${index}">
 						<div class="content ${isCorrectAnswer.toLocaleLowerCase() === 'correct' ? 'hideResultInnerHolder':''}">
-							<div class="contentHolder">
-								${svg} ${index+1}. <div>${data.question}</div>
-							</div>
+							<div class="contentHolder">${svg} ${index+1}. <div>${data.question}</div></div>
 							<div class="question hide">${data.question}</div>
 							${this.getQuestionOptionsFormation(item)}
 						</div>
+
 						<div class="${isQuestionAttempt ? 'answered' : 'unanswered'}">
 							${isCorrectAnswer}
 						</div>
@@ -311,8 +310,7 @@ class App {
 						const userSelectedItems = this.userSelected(item, tempQid, type);
 						
 						return(`<li uid="${item.optionId}" n="${item.isCorrect}" 
-							class="
-								${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
+							class="${(type !== 'matching') && (item.isCorrect === 1) ? 'correct' : ''} 
 								${userSelectedItems ? 'active' : ''}
 								${((type === 'matching') && tempQid && tempQid[index] && dropdown[tempQid[index]]) ? 'active' : ''} 
 								${(userSelectedItems && (type === 'matching')) ? 'correct' : ''}  
@@ -321,7 +319,7 @@ class App {
 										<span class="bullet">${alphbetArray[index]}</span>
 										<p class="option">
 											${item.option}
-											</p>
+										</p>
 									</div>
 									<div class="resultInnerHolder">
 										<span class="correctAnswer">Correct Answer ${(type === 'matching') ? `: <i>${dropdown[item.isCorrect]}</i>` : '' }</span>
@@ -421,7 +419,9 @@ class App {
 							<select uid="${item.optionId}">
 								${((activeOptions[index] === null) || (activeOptions.length === 0)) && `<option>Select</option>`}
 								${dropdown.map((item, i) => 
-									`<option ${((+activeOptions[index] === numberArray[i]) && (activeOptions[index] !== null)) && 'selected'} value="${numberArray[i]}">${dropdown[i]}</option>`).join("")}
+									`<option ${((+activeOptions[index] === numberArray[i]) && (activeOptions[index] !== null)) && 'selected'} value="${numberArray[i]}">
+										${dropdown[i]}
+									</option>`).join("")}
 							</select>
 						</div>
 						<div class="selectLabel" sid="">
